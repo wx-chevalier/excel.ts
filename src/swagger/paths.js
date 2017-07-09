@@ -21,7 +21,8 @@ export function buildSwaggerJSON() {
   for (let key of Object.keys(innerAPIObject)) {
     let value = innerAPIObject[key];
 
-    let parentKey = `${value.instance.target.__proto__.name}-${value.instance.key}`;
+    let parentKey = `${value.instance.target.__proto__.name}-${value.instance
+      .key}`;
 
     // 判断 requestMapping 是否存在，不存在则表示为父类
     if (!value.requestMapping) {
@@ -44,67 +45,60 @@ export function buildSwaggerJSON() {
 
     apiDoc.parameters = [];
 
-    // 构建路径参数
-    let pathParameter =
-      value.pathParameter || innerAPIObject[parentKey].pathParameter;
+    const merge = key => {
+      return []
+        .concat(
+          innerAPIObject[parentKey] ? innerAPIObject[parentKey][key] || [] : []
+        )
+        .concat(value[key] || []);
+    };
 
-    if (pathParameter) {
-      for (let param of pathParameter) {
-        apiDoc.parameters.push({
-          ...param,
-          collectionFormat: "csv"
-        });
-      }
+    // 构建路径参数
+    // 这里需要整合父类的声明
+    let pathParameter = merge("pathParameter");
+
+    for (let param of pathParameter) {
+      apiDoc.parameters.push({
+        ...param,
+        collectionFormat: "csv"
+      });
     }
 
     // 构建查询参数
-    let queryParameter =
-      value.queryParameter || innerAPIObject[parentKey].queryParameter;
+    let queryParameter = merge("queryParameter");
 
-    if (queryParameter) {
-      for (let param of queryParameter) {
-        apiDoc.parameters.push({
-          ...param,
-          items: {
-            type: param.items && param.items.length > 0
-              ? param.items[0]
-              : undefined
-          },
-          collectionFormat: "csv"
-        });
-      }
+    for (let param of queryParameter) {
+      apiDoc.parameters.push({
+        ...param,
+        items: {
+          type:
+            param.items && param.items.length > 0 ? param.items[0] : undefined
+        },
+        collectionFormat: "csv"
+      });
     }
 
     // 构建请求体参数
-    let bodyParameter =
-      value.bodyParameter || innerAPIObject[parentKey].bodyParameter;
+    let bodyParameter = merge("bodyParameter");
 
-    if (bodyParameter) {
-      for (let param of bodyParameter) {
-        apiDoc.parameters.push({
-          ...param,
-          schema: _convertSchema(param.schema)
-        });
-      }
+    for (let param of bodyParameter) {
+      apiDoc.parameters.push({
+        ...param,
+        schema: _convertSchema(param.schema)
+      });
     }
 
     apiDoc.responses = {};
 
     // 判断是直接获取该类的响应值注解还是获取父类的响应值注解
-    let responses =
-      value.responses ||
-      innerAPIObject[
-        `${value.instance.target.__proto__.name}-${value.instance.key}`
-      ].responses;
+    let responses = merge("responses");
 
     // 构建返回值
-    if (responses) {
-      for (let resp of responses) {
-        apiDoc.responses[resp.statusCode] = {
-          description: resp.description,
-          schema: _convertSchema(resp.schema)
-        };
-      }
+    for (let resp of responses) {
+      apiDoc.responses[resp.statusCode] = {
+        description: resp.description,
+        schema: _convertSchema(resp.schema)
+      };
     }
   }
 

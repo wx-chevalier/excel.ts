@@ -17,7 +17,8 @@ export default class UserControllerDoc {
   @pathParameter({
     name: "id",
     description: "user id",
-    type: "integer"
+    type: "integer",
+    defaultValue: 1
   })
   @queryParameter({
     name: "tags",

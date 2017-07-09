@@ -3,7 +3,8 @@
  */
 
 import UserController from "./controller/UserController";
-import {wrappingKoaRouter} from "../src/transform/koa_router";
+import { wrappingKoaRouter } from "../src/transform/koa_router";
+import AnnouncementController from "./controller/AnnouncementController";
 const Router = require("koa-router");
 
 const router = new Router();
@@ -22,6 +23,7 @@ router.get("/", async function(ctx, next) {
 
 //定义用户处理路由
 router.scan(UserController);
+router.scan(AnnouncementController);
 
 //默认导出路由配置
 export default router;

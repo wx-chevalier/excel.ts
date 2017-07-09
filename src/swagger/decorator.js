@@ -57,16 +57,19 @@ export function apiDescription(
  * @param name
  * @param description
  * @param type
+ * @param defaultValue
  * @returns {Function}
  */
 export function pathParameter({
   name,
   description,
-  type
+  type,
+  defaultValue
 }: {
   name: string,
   description: string,
-  type: string
+  type: string,
+  defaultValue: any
 }) {
   return function(target, key, descriptor) {
     let apiKey = `${target.name}-${key}`;
@@ -76,12 +79,13 @@ export function pathParameter({
     innerAPIObject[apiKey].pathParameter ||
       (innerAPIObject[apiKey].pathParameter = []);
 
-    innerAPIObject[apiKey].pathParameter.push({
+    innerAPIObject[apiKey].pathParameter.splice(0, 0, {
       name,
       description,
       type,
       in: "path",
-      required: true
+      required: true,
+      default: defaultValue
     });
 
     return descriptor;
@@ -95,6 +99,7 @@ export function pathParameter({
  * @param required
  * @param type
  * @param items
+ * @param defaultValue
  * @returns {Function}
  */
 export function queryParameter({
@@ -102,7 +107,8 @@ export function queryParameter({
   description,
   required,
   type,
-  items
+  items,
+  defaultValue
 }: {
   name: string,
   description: string,
@@ -118,13 +124,14 @@ export function queryParameter({
     innerAPIObject[apiKey].queryParameter ||
       (innerAPIObject[apiKey].queryParameter = []);
 
-    innerAPIObject[apiKey].queryParameter.push({
+    innerAPIObject[apiKey].queryParameter.splice(0, 0, {
       name,
       description,
       required,
       type,
       items,
-      in: "query"
+      in: "query",
+      default: defaultValue
     });
 
     return descriptor;
@@ -158,7 +165,7 @@ export function bodyParameter({
     innerAPIObject[apiKey].bodyParameter ||
       (innerAPIObject[apiKey].bodyParameter = []);
 
-    innerAPIObject[apiKey].bodyParameter.push({
+    innerAPIObject[apiKey].bodyParameter.splice(0, 0, {
       name,
       description,
       required,
@@ -192,7 +199,7 @@ export function apiResponse(
 
     innerAPIObject[apiKey].responses || (innerAPIObject[apiKey].responses = []);
 
-    innerAPIObject[apiKey].responses.push({
+    innerAPIObject[apiKey].responses.splice(0, 0, {
       statusCode,
       description,
       schema

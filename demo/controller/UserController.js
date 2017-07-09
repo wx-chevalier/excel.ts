@@ -15,7 +15,6 @@ import UserControllerDoc from "./UserControllerDoc";
  * Description 用户相关控制器
  */
 export default class UserController extends UserControllerDoc {
-
   @apiRequestMapping("get", "/users")
   @apiDescription("get all users list")
   static async getUsers(ctx, next): [User] {

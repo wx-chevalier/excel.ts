@@ -8,6 +8,11 @@ import { innerEntityObject } from "../singleton";
  * @private
  */
 export function buildDefinitions(Class: any) {
+  // 为了避免部分情况下传入的是 Class 数组，因此首先进行递归处理
+  while (Array.isArray(Class)) {
+    Class = Class[0];
+  }
+
   // 初始化 Swagger JSON 中的 definitions 字段
   swaggerJSON["definitions"] || (swaggerJSON["definitions"] = {});
 
@@ -39,13 +44,14 @@ export function buildDefinitions(Class: any) {
 
       let realType = originType[0];
 
-      property.items = typeof realType === "function"
-        ? {
-            $ref: `#/definitions/${originType[0].name}`
-          }
-        : {
-            type: `${originType[0]}`
-          };
+      property.items =
+        typeof realType === "function"
+          ? {
+              $ref: `#/definitions/${originType[0].name}`
+            }
+          : {
+              type: `${originType[0]}`
+            };
     }
 
     // 如果为函数类型

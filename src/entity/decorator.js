@@ -13,6 +13,16 @@ export function generateEntityUUID(target, key, descriptor) {
 }
 
 /**
+ * Description 为某个类加上注解，并且创建新的对象以触发内部迭代注解
+ * @param Class
+ * @returns {*}
+ */
+export function entity(Class) {
+  new Class();
+  return Class;
+}
+
+/**
  * Description 创建某个属性的描述
  * @param type 基础类型 self - 表示为自身
  * @param description 描述
