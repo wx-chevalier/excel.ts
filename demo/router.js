@@ -3,7 +3,7 @@
  */
 
 import UserController from "./controller/UserController";
-import { wrappingKoaRouter } from "../src/transform/koa_router";
+import { wrappingKoaRouter } from "../src/transform/router/koa_router";
 import AnnouncementController from "./controller/AnnouncementController";
 const Router = require("koa-router");
 

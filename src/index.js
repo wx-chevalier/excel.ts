@@ -1,5 +1,10 @@
 // @flow
 
+export { innerAPIObject, innerEntityObject } from "./internal/singleton";
+
+export { entity, entityProperty } from "./entity/decorator";
+export { instantiate } from "./entity/factory";
+
 export {
   apiRequestMapping,
   apiDescription,
@@ -8,7 +13,5 @@ export {
   queryParameter,
   apiResponse
 } from "./swagger/decorator";
-export { entityProperty } from "./entity/decorator";
-export { wrappingKoaRouter } from "./transform/koa_router";
-export { generateSequelizeModel } from "./transform/sequelize";
-export { innerAPIObject, innerEntityObject } from "./singleton";
+export { wrappingKoaRouter } from "./transform/router/koa_router";
+export { generateSequelizeModel } from "./transform/entity/sequelize";

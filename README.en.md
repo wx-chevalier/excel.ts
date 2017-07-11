@@ -1,9 +1,10 @@
 
-> [Koa2 Boilerplate](https://parg.co/bvx)
+
 
 # swagger-decorator: Node.js 应用中一处注解，多处使用
 
 > - [OpenAPI Specification](http://swagger.io/specification/)
+> - [Koa2 Boilerplate](https://parg.co/bvx)
 
 - use yarn or npm to install:
 ```shell
@@ -38,32 +39,42 @@ router.scan(UserController);
 ```
 
 - define Controller and use decorator to attach description for api:
+
 ```javascript
-import {
-  apiDescription,
-  apiRequestMapping,
-  apiResponse,
-  bodyParameter,
-  pathParameter,
-  queryParameter
-} from "swagger-decorator";
-import User from "../entity/User";
-
-
-export default class UserController {
+export default class UserController extends UserControllerDoc {
   @apiRequestMapping("get", "/users")
   @apiDescription("get all users list")
-  @apiResponse(200, "get users successfully", [User])
   static async getUsers(ctx, next): [User] {
-    ...
+    ctx.body = [new User()];
   }
 
   @apiRequestMapping("get", "/user/:id")
   @apiDescription("get user object by id, only access self or friends")
+  static async getUserByID(ctx, next): User {
+    ctx.body = new User();
+  }
+
+  @apiRequestMapping("post", "/user")
+  @apiDescription("create new user")
+  static async postUser(): number {
+    ctx.body = {
+      statusCode: 200
+    };
+  }
+}
+```
+
+```javascript
+
+export default class UserControllerDoc {
+  @apiResponse(200, "get users successfully", [User])
+  static async getUsers(ctx, next): [User] {}
+
   @pathParameter({
     name: "id",
     description: "user id",
-    type: "integer"
+    type: "integer",
+    defaultValue: 1
   })
   @queryParameter({
     name: "tags",
@@ -73,12 +84,8 @@ export default class UserController {
     items: ["string"]
   })
   @apiResponse(200, "get user successfully", User)
-  static async getUserByID(ctx, next): User {
-    ...
-  }
+  static async getUserByID(ctx, next): User {}
 
-  @apiRequestMapping("post", "/user")
-  @apiDescription("create new user")
   @bodyParameter({
     name: "user",
     description: "the new user object, must include user name",
@@ -86,12 +93,11 @@ export default class UserController {
     schema: User
   })
   @apiResponse(200, "create new user successfully", {
-    status_code: "200"
+    statusCode: 200
   })
-  static async postUser(): number {
-    ...
-  }
+  static async postUser(): number {}
 }
+
 ```
 
 - decorate the Entity:
@@ -137,24 +143,3 @@ export default class User {
 ```
 ![](https://coding.net/u/hoteam/p/Cache/git/raw/master/2017/6/1/WX20170617-172707.png)
 
-# DataType
-
-| Common Name | [`type`](http://swagger.io/specification/#dataTypeType) | [`format`](http://swagger.io/specification/#dataTypeFormat) | Comments                                 |
-| ----------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| integer     | `integer`                                | `int32`                                  | signed 32 bits                           |
-| long        | `integer`                                | `int64`                                  | signed 64 bits                           |
-| float       | `number`                                 | `float`                                  |                                          |
-| double      | `number`                                 | `double`                                 |                                          |
-| string      | `string`                                 |                                          |                                          |
-| byte        | `string`                                 | `byte`                                   | base64 encoded characters                |
-| binary      | `string`                                 | `binary`                                 | any sequence of octets                   |
-| boolean     | `boolean`                                |                                          |                                          |
-| date        | `string`                                 | `date`                                   | As defined by `full-date` - [RFC3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html#anchor14) |
-| dateTime    | `string`                                 | `date-time`                              | As defined by `date-time` - [RFC3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html#anchor14) |
-| password    | `string`                                 | `password`                               | Used to hint UIs the input needs to be obscured. |
-
-
-
-# RoadMap
-
-- 复合类型推导

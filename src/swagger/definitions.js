@@ -2,7 +2,7 @@
 
 import { swaggerJSON } from "./template/swagger.json";
 import { inferenceEntityProperties } from "../entity/type";
-import { innerEntityObject } from "../singleton";
+import { innerEntityObject } from "../internal/singleton";
 /**
  * Description 构建实例定义
  * @private

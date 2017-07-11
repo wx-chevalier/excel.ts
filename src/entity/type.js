@@ -1,4 +1,23 @@
 // @flow
+import type { InnerEntityProperty } from "../internal/types";
+
+export const innerPrimitiveTypes = [
+  "integer",
+  "float",
+  "double",
+  "number",
+  "string",
+  "boolean",
+  "date"
+];
+
+export function isPrimitive(type) {
+  if (Array.isArray(type)) {
+    return innerPrimitiveTypes.includes(type[0]);
+  } else {
+    return innerPrimitiveTypes.includes(type);
+  }
+}
 
 /**
  * Description 根据输入的实体类类型与内置的实体对象推测出实体属性
@@ -6,21 +25,33 @@
  * @param innerEntityObject
  * @returns {*}
  */
-export function inferenceEntityProperties(EntityClass, innerEntityObject) {
+export function inferenceEntityProperties(
+  EntityClass,
+  innerEntityObject
+): InnerEntityProperty {
   let entityName = EntityClass.name;
 
+  // 构建内部实例以获取默认值
   let entityInstance = new EntityClass();
 
   // 对象包含的自有属性
   let propertyNames = Object.getOwnPropertyNames(entityInstance);
 
   // 获取内置对象中定义的 Properties
-  let properties = Object.assign(
-    {},
-    innerEntityObject[entityName]
-      ? innerEntityObject[entityName].properties
-      : {}
-  );
+  // @Warning 这里本来是一层浅复制，导致了属性错乱，因此改成多层复制
+  let properties = {};
+
+  // 遍历所有已经设置过的用户属性
+  if (innerEntityObject[entityName].properties) {
+    let settledProperties = innerEntityObject[entityName].properties;
+
+    for (let settledPropertyName of Object.keys(settledProperties)) {
+      properties[settledPropertyName] = Object.assign(
+        {},
+        settledProperties[settledPropertyName]
+      );
+    }
+  }
 
   // 遍历所有没有使用注解的属性
   for (let propertyName of propertyNames) {

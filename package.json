@@ -1,6 +1,6 @@
 {
   "name": "swagger-decorator",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Decorator for Koa2 and koa-router, Auto-Generate Swagger Docs",
   "main": "dist/index.js",
   "browser": "dist/index.browser.js",
@@ -12,14 +12,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wxyyxc1992/Web-Frontend-Introduction-And-Best-Practices"
+    "url": "https://github.com/wxyyxc1992/swagger-docorator"
   },
-  "keywords": [
-    "NodeJS",
-    "Express",
-    "Koa2",
-    "Swagger"
-  ],
+  "keywords": ["NodeJS", "Express", "Koa2", "Swagger"],
   "author": "wxyyxc1992",
   "license": "ISC",
   "bugs": {
@@ -53,6 +48,9 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "babel-plugin-syntax-class-properties": "^6.13.0",
+    "babel-plugin-syntax-decorators": "^6.13.0",
+    "babel-plugin-syntax-flow": "^6.18.0",
     "path-to-regexp": "^1.7.0",
     "sequelize": "^4.2.1"
   }

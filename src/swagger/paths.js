@@ -1,6 +1,6 @@
 // @flow
 const pathToRegexp = require("path-to-regexp");
-import { innerAPIObject } from "../singleton";
+import { innerAPIObject } from "../internal/singleton";
 import { swaggerJSON } from "./template/swagger.json";
 
 // 标志是否编译完毕

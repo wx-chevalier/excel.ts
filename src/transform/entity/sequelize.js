@@ -2,8 +2,8 @@
 const debug = require("debug")("sequelize");
 const Sequelize = require("sequelize");
 
-import { inferenceEntityProperties } from "../entity/type";
-import { innerEntityObject } from "../singleton";
+import { inferenceEntityProperties } from "../../entity/type";
+import { innerEntityObject } from "../../internal/singleton";
 
 /**
  * Description 构造 Sequelize 模型

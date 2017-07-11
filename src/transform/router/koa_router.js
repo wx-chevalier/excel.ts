@@ -2,9 +2,9 @@
 const path = require("path");
 const debug = require("debug")("koa_router");
 
-import { buildSwaggerJSON } from "../swagger/paths";
-import { swaggerJSON } from "../swagger/template/swagger.json";
-import { swaggerHTML } from "../swagger/template/swagger.html";
+import { buildSwaggerJSON } from "../../swagger/paths";
+import { swaggerJSON } from "../../swagger/template/swagger.json";
+import { swaggerHTML } from "../../swagger/template/swagger.html";
 
 const methods = [
   "get",
@@ -48,7 +48,9 @@ export function wrappingKoaRouter(
 
   // 设置 api.json 的请求
   router.get("/swagger/api.json", function(ctx, next) {
+    // 构建 SwaggerJSON 文档
     buildSwaggerJSON();
+
     ctx.body = swaggerJSON;
   });
 
@@ -81,7 +83,11 @@ export function wrappingKoaRouter(
   methods.forEach((method: string) => {
     const originMethod = router[method];
 
-    router[method] = function(pathOrFunction: string, func: Function) {
+    // Hook 原 router 对象的方法，使其能够读取到函数的配置信息
+    router[method] = function(
+      pathOrFunction: string | Function,
+      func: Function
+    ) {
       // 如果 pathOrFunction 为字符串，则表示为正常调用
       if (pathOrFunction && typeof pathOrFunction === "string") {
         originMethod.call(router, pathOrFunction, func);

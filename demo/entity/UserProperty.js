@@ -1,12 +1,12 @@
 // @flow
-import {entityProperty} from "../../src/entity/decorator";
+import { entityProperty } from "../../src/entity/decorator";
+
 export default class UserProperty {
-  // 属性
+  // 朋友列表
   @entityProperty({
-    type: ["string"],
-    description: "user emails",
+    type: ["number"],
+    description: "user friends, which is user ids",
     required: false
   })
-  emails = [];
+  friends: [number];
 }
-

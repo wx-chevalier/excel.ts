@@ -10,7 +10,7 @@ export default class User {
   @entityProperty({
     type: "integer",
     description: "user id, auto-generated",
-    required: false
+    required: true
   })
   id: string = 0;
 
@@ -18,17 +18,18 @@ export default class User {
   @entityProperty({
     type: "string",
     description: "user name, 3~12 characters",
-    required: true
+    required: false
   })
   name: string = "name";
 
-  // 朋友列表
+  // 邮箱
   @entityProperty({
-    type: ["self"],
-    description: "user friends, which is instance of self",
+    type: "string",
+    description: "user email",
+    pattern: "email",
     required: false
   })
-  friends: [User];
+  email: string = "email";
 
   // 属性
   @entityProperty({
@@ -36,7 +37,5 @@ export default class User {
     description: "user property",
     required: false
   })
-  properties: {
-    address: string
-  } = new UserProperty();
+  property: UserProperty = new UserProperty();
 }

@@ -1,4 +1,6 @@
 // @flow
 
-export { entityProperty } from "./entity/decorator";
-export { innerEntityObject } from "./singleton";
+export { innerEntityObject } from "./internal/singleton";
+
+export { entity, entityProperty } from "./entity/decorator";
+export { instantiate } from "./entity/factory";

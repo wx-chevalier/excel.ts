@@ -1,5 +1,5 @@
 // @flow
-import { innerEntityObject } from "../singleton";
+import { innerEntityObject } from "../internal/singleton";
 import { buildDefinitions } from "../swagger/definitions";
 
 /**
@@ -54,9 +54,12 @@ export function entityProperty({
     let valueObject = innerEntityObject[entityUUID]["properties"][key];
 
     // 判断是否为自身
-    if (type === "self") {
+    if (type === "self" || type === undefined) {
       valueObject.type = target.constructor;
-    } else if (Array.isArray(type) && type[0] === "self") {
+    } else if (
+      Array.isArray(type) &&
+      (type[0] === "self" || type[0] === undefined)
+    ) {
       valueObject.type = [target.constructor];
     } else {
       valueObject.type = type;
@@ -80,8 +83,12 @@ export function entityProperty({
     }
 
     // 设置其他属性
+    valueObject.pattern = pattern;
     valueObject.defaultValue = defaultValue;
     valueObject.primaryKey = primaryKey;
+
+    // 这里需要设置下 writeable 为 true
+    descriptor.writable = true;
 
     return descriptor;
   };

@@ -1,5 +1,5 @@
 // @flow
-import { innerAPIObject } from "../singleton";
+import { innerAPIObject } from "../internal/singleton";
 import { buildDefinitions } from "./definitions";
 
 /**
