@@ -1,7 +1,7 @@
 // @flow
 import { innerEntityObject } from "../internal/singleton";
-import { validate } from "../../lib/declarative-validator/src/core/validator";
 import { innerPrimitiveTypes, isPrimitive } from "./type";
+import { validate } from "../lib/declarative-validator/src/core/validator";
 const debug = require("debug")("factory");
 
 /**
