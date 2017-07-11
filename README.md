@@ -1,5 +1,5 @@
 
-中文版本 | English Version
+中文版本 | [English Version](https://github.com/wxyyxc1992/swagger-decorator/blob/master/README.en.md)
 
 > [基于 swagger-decorator 的自动实体类构建与 Swagger 接口文档生成]()，对于不反感使用注解的项目中利用 swagger-decorator 添加合适的实体类或者接口类注解，从而实现支持嵌套地实体类校验与生成、Sequelize 等 ORM 模型生成、基于 Swagger 的接口文档生成等等功能。
 
