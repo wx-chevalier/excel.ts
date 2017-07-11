@@ -61,21 +61,18 @@ export function wrappingKoaRouter(
   router.scan = function(StaticClass: Function) {
     let methods = Object.getOwnPropertyNames(StaticClass);
 
-    // 移除前三个属性 constructor、name
-    methods.shift();
-    methods.shift();
-    methods.shift();
-
     // 遍历该类中的所有方法
     for (let method of methods) {
-      // 添加权限校验
-      router.use(
-        basePath + StaticClass[method].path,
-        validate(StaticClass[method])
-      );
+      if(typeof method === "function" && method.path) {
+          // 添加权限校验
+          router.use(
+              basePath + StaticClass[method].path,
+              validate(StaticClass[method])
+          );
 
-      // 使用该类中的所有方法
-      router.all(StaticClass[method]);
+          // 使用该类中的所有方法
+          router.all(StaticClass[method]);
+      }
     }
   };
 
