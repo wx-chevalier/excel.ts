@@ -1,11 +1,11 @@
 
-中文版本 | English Version
+中文版本 | [English Version](https://github.com/wxyyxc1992/swagger-decorator/blob/master/README.en.md)
 
 > [基于 swagger-decorator 的自动实体类构建与 Swagger 接口文档生成]()，对于不反感使用注解的项目中利用 swagger-decorator 添加合适的实体类或者接口类注解，从而实现支持嵌套地实体类校验与生成、Sequelize 等 ORM 模型生成、基于 Swagger 的接口文档生成等等功能。
 
 # swagger-decorator: 一处注解，多处使用
 
-swagger-decorator 的初衷是为了简化 JavaScript 应用开发，笔者在编写 JavaScript 应用（Web 前端 & Node.js）时发现我们经常需要重复地创建实体类、添加注释或者进行类型校验，swagger-decorator 希望能够让开发者一处注解、多处使用。需要强调的是，在笔者多年的 Java 应用开发中也感受到，过多过度的注解反而会大大削弱代码的可读性，因此笔者也建议应该在合适的时候舒心地使用 
+swagger-decorator 的初衷是为了简化 JavaScript 应用开发，笔者在编写 JavaScript 应用（Web 前端 & Node.js）时发现我们经常需要重复地创建实体类、添加注释或者进行类型校验，swagger-decorator 希望能够让开发者一处注解、多处使用。需要强调的是，在笔者多年的 Java 应用开发中也感受到，过多过度的注解反而会大大削弱代码的可读性，因此笔者也建议应该在合适的时候舒心地使用 
 swagger-decorator，而不是本末倒置，一味地追求注解覆盖率。swagger-decorator 已经可以用于实体类生成与校验、Sequelize ORM 实体类生成、面向 Koa 的路由注解与 Swagger 文档自动生成。我们可以使用 yarn 或者 npm 安装 swagger-decorator 依赖，需要注意的是，因为我们在开发中还会用到注解语法，因此还需要添加 babel-plugin-transform-decorators-legacy 插件以进行语法兼容转化。
 
 ```shell
@@ -115,6 +115,7 @@ export default class UserProperty {
 ```
 
 数据类型支持：
+
 | Common Name | [`type`](http://swagger.io/specification/#dataTypeType) | [`format`](http://swagger.io/specification/#dataTypeFormat) | Comments                                 |
 | ----------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | integer     | `integer`                                | `int32`                                  | signed 32 bits                           |
