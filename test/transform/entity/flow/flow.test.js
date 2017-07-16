@@ -1,18 +1,14 @@
 // @flow
 
-import { flowToDecorator } from "../../../../src/transform/entity/flow/flow";
+import { flowToDecorator } from '../../../../src/transform/entity/flow/flow';
 
-let fileName =
-  "/Users/apple/Workspace/Repo/swagger-decorator/test/transform/entity/flow/";
-
-flowToDecorator(
-  fileName + "TestEntity.js",
-  fileName + "TestEntity.transformed.js"
-).then(
-  codeStr => {
-    console.log(codeStr);
-  },
-  err => {
-    console.error(err);
-  }
-);
+test('测试从 Flow 中提取出数据类型并且转化为 Swagger 接口类', () => {
+  flowToDecorator('./TestEntity.js', './TestEntity.transformed.js').then(
+    codeStr => {
+      console.log(codeStr);
+    },
+    err => {
+      console.error(err);
+    }
+  );
+});

@@ -1,16 +1,22 @@
 // @flow
-import type { InnerEntityProperty } from "../internal/types";
+import type { InnerEntityProperty } from '../internal/types';
 
+// 定义所有的内部原始类型
 export const innerPrimitiveTypes = [
-  "integer",
-  "float",
-  "double",
-  "number",
-  "string",
-  "boolean",
-  "date"
+  'integer',
+  'float',
+  'double',
+  'number',
+  'string',
+  'boolean',
+  'date'
 ];
 
+/**
+ * Description 判断是否为原始类型或者原始类型的数组
+ * @param type
+ * @return {boolean}
+ */
 export function isPrimitive(type) {
   if (Array.isArray(type)) {
     return innerPrimitiveTypes.includes(type[0]);
@@ -86,7 +92,7 @@ export function inferenceEntityProperties(
  */
 export function inferenceType(obj: any) {
   if (Array.isArray(obj)) {
-    return "array";
+    return 'array';
   } else {
     return typeof obj;
   }

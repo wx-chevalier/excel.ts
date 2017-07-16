@@ -1,29 +1,29 @@
 // @flow
 
-const fs = require("fs");
-const { promisify } = require("util");
+const fs = require('fs');
+const { promisify } = require('util');
 const readFileAsync = promisify(fs.readFile); // (A)
 
-const babel = require("babel-core");
+const babel = require('babel-core');
 
 import {
   extractFlowTypeFromClassProperty,
   generateDecoratorWithObjectParams,
   generateImportDeclaration
-} from "../../../internal/babel/ast";
+} from '../../../internal/babel/ast';
 
 export function flowToDecoratorPlugin(babel) {
   const { types: t } = babel;
 
   return {
-    name: "flow-to-decorator-ast-transform", // not required
+    name: 'flow-to-decorator-ast-transform', // not required
     visitor: {
       Program(path) {
         // 添加头部导入库
         path.node.body.splice(
           0,
           0,
-          generateImportDeclaration("{ entityProperty }", "swagger-decorator")
+          generateImportDeclaration('{ entityProperty }', 'swagger-decorator')
         );
       },
 
@@ -34,10 +34,10 @@ export function flowToDecoratorPlugin(babel) {
 
           path.node.decorators = [
             generateDecoratorWithObjectParams(
-              "entityProperty",
+              'entityProperty',
               {
                 type: typeAndValue.type,
-                required: typeAndValue.value === "undefined"
+                required: typeAndValue.value === 'undefined'
               },
               typeAndValue.comment
             )
@@ -60,12 +60,12 @@ export async function flowToDecorator(
 ) {
   let codeStr = (await readFileAsync(fileName)).toString();
 
-  // use our plugin to transform the source
+  // 使用自定义插件进行转化
   const out = babel.transform(codeStr, {
     plugins: [
-      "syntax-flow",
-      "syntax-class-properties",
-      "syntax-decorators",
+      'syntax-flow',
+      'syntax-class-properties',
+      'syntax-decorators',
       flowToDecoratorPlugin
     ]
   });

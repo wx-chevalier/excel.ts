@@ -1,14 +1,15 @@
-import { entityProperty } from "swagger-decorator";
 // @flow
 
-import AnotherEntity from "./AnotherEntity";
+import { entityProperty } from 'swagger-decorator';
+
+import AnotherEntity from './AnotherEntity';
 
 class Entity {
   // Comment
   @entityProperty({
-    type: "string",
+    type: 'string',
     required: false,
-    description: "Comment"
+    description: 'Comment'
   })
   stringProperty: string = 0;
 
@@ -19,14 +20,14 @@ class Entity {
   classProperty: Entity = null;
 
   @entityProperty({
-    type: "string",
+    type: 'string',
     required: false
   })
   rawProperty;
 
   @entityProperty({
-    type: "string",
-    description: "this is property description",
+    type: 'string',
+    description: 'this is property description',
     required: true
   })
   decoratedProperty;

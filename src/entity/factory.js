@@ -1,8 +1,8 @@
 // @flow
-import { innerEntityObject } from "../internal/singleton";
-import { innerPrimitiveTypes, isPrimitive } from "./type";
-import { validate } from "../lib/declarative-validator/src/core/validator";
-const debug = require("debug")("factory");
+import { innerEntityObject } from '../internal/singleton';
+import { innerPrimitiveTypes, isPrimitive } from './type';
+import { validate } from 'declarative-validator';
+const debug = require('debug')('factory');
 
 /**
  * Description 从实体类中生成对象，并且进行数据校验；注意，这里会进行递归生成，即对实体类对象同样进行生成
@@ -36,7 +36,7 @@ export function instantiate(
 
   if (!validation.isPass) {
     // 如果校验失败，则抛出异常
-    let error = new Error("validate fail!");
+    let error = new Error('validate fail!');
 
     error.validation = validation;
 
@@ -79,7 +79,7 @@ export function instantiate(
         }
       } else {
         // 判断是否为数组
-        if (type === "array" || Array.isArray(type)) {
+        if (type === 'array' || Array.isArray(type)) {
           // 如果为数组则返回数组
           instance[property] = data[property].map(data => {
             return instantiate(type[0], data[property], {
@@ -127,7 +127,7 @@ export function extractRulesFromClass(EntityClass) {
     } else {
       // 判断是否为必须值
       if (requiredCondition) {
-        rule = "required";
+        rule = 'required';
       }
     }
 

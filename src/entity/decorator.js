@@ -1,6 +1,6 @@
 // @flow
-import { innerEntityObject } from "../internal/singleton";
-import { buildDefinitions } from "../swagger/definitions";
+import { innerEntityObject } from '../internal/singleton';
+import { buildDefinitions } from '../swagger/definitions';
 
 /**
  * Description 生成实体类的唯一标识，这里首先默认使用实体类名作为唯一标识
@@ -34,8 +34,8 @@ export function entity(Class) {
  */
 export function entityProperty({
   // 生成接口文档需要的参数
-  type = "string",
-  description = "",
+  type = 'string',
+  description = '',
   required = false,
   defaultValue = undefined,
 
@@ -51,14 +51,14 @@ export function entityProperty({
     // 确保实体键存在
     _ensure(entityUUID, key);
 
-    let valueObject = innerEntityObject[entityUUID]["properties"][key];
+    let valueObject = innerEntityObject[entityUUID]['properties'][key];
 
     // 判断是否为自身
-    if (type === "self" || type === undefined) {
+    if (type === 'self' || type === undefined) {
       valueObject.type = target.constructor;
     } else if (
       Array.isArray(type) &&
-      (type[0] === "self" || type[0] === undefined)
+      (type[0] === 'self' || type[0] === undefined)
     ) {
       valueObject.type = [target.constructor];
     } else {
@@ -73,7 +73,7 @@ export function entityProperty({
 
     // 如果是必须属性，则添加到列表中
     if (required) {
-      innerEntityObject[entityUUID]["required"].push(key);
+      innerEntityObject[entityUUID]['required'].push(key);
 
       // 对应地不允许为空
       valueObject.allowNull = false;
@@ -103,12 +103,12 @@ export function entityProperty({
 function _ensure(entityUUID, property) {
   innerEntityObject[entityUUID] || (innerEntityObject[entityUUID] = {});
 
-  innerEntityObject[entityUUID]["required"] ||
-    (innerEntityObject[entityUUID]["required"] = []);
+  innerEntityObject[entityUUID]['required'] ||
+    (innerEntityObject[entityUUID]['required'] = []);
 
-  innerEntityObject[entityUUID]["properties"] ||
-    (innerEntityObject[entityUUID]["properties"] = {});
+  innerEntityObject[entityUUID]['properties'] ||
+    (innerEntityObject[entityUUID]['properties'] = {});
 
-  innerEntityObject[entityUUID]["properties"][property] ||
-    (innerEntityObject[entityUUID]["properties"][property] = {});
+  innerEntityObject[entityUUID]['properties'][property] ||
+    (innerEntityObject[entityUUID]['properties'][property] = {});
 }
