@@ -7,7 +7,7 @@
 const checkFunctionType = (fn: any) => {
   const type = typeof fn;
   if (type !== 'function')
-    throw `The observer-x.listen method accepts as argument "typeof 'function'", "${type}" is not allowed`;
+    throw `The observerX.listen method accepts as argument "typeof 'function'", "${type}" is not allowed`;
 };
 
 /**

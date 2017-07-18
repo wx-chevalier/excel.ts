@@ -67,6 +67,7 @@ export function enhance(
     [dispatchTree](property, value, oldValue = undefined) {
       obj[dispatch](property, value, oldValue);
 
+      // 获取当前对象的父对象
       let parent = objTree.get(obj);
 
       // 如果存在父属性，则递归通知

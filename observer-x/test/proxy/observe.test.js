@@ -1,11 +1,13 @@
 // @flow
 
-import observe from '../../src/proxy/observe';
-import User from '../../../../../demo/entity/User';
+import { observe } from '../../dist/observer-x';
 
-const obj = observe(new User(), {
-  recursive: true
-});
+const obj = observe(
+  {},
+  {
+    recursive: true
+  }
+);
 
 obj.property = {};
 
