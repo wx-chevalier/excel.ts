@@ -2,7 +2,7 @@
 ![](https://coding.net/u/hoteam/p/Cache/git/raw/master/2017/6/1/noun_28890_cc.png)
 [![npm version](https://badge.fury.io/js/swagger-decorator.svg)](https://badge.fury.io/js/swagger-decorator)
 
-中文版本 | [English Version](https://github.com/wxyyxc1992/swagger-decorator/blob/master/README.en.md)
+中文版本 | [English Version](https://github.com/wxyyxc1992/Modern-JavaScript-Entity/blob/master/swagger-decorator/README.en.md)
 
 Decorate Once, Use Everywhere - Decorator For JavaScript and Node.js Application
 
