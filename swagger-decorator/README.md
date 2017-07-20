@@ -4,8 +4,6 @@
 
 中文版本 | [English Version](https://github.com/wxyyxc1992/Modern-JavaScript-Entity/blob/master/swagger-decorator/README.en.md)
 
-Decorate Once, Use Everywhere - Decorator For JavaScript and Node.js Application
-
 > [基于 swagger-decorator 的自动实体类构建与 Swagger 接口文档生成](https://zhuanlan.zhihu.com/p/27941329)是笔者对于开源项目[ swagger-decorator ](https://github.com/wxyyxc1992/swagger-decorator)的描述，对于不反感使用注解的项目中利用 swagger-decorator 添加合适的实体类或者接口类注解，从而实现支持嵌套地实体类校验与生成、Sequelize 等 ORM 模型生成、基于 Swagger 的接口文档生成等等功能。如果有对 JavaScript 语法使用尚存不明的可以参考[ JavaScript 学习与实践资料索引](https://parg.co/bMI)或者[现代 JavaScript 开发：语法基础与实践技巧](https://parg.co/b1c)系列文章。
 
 # swagger-decorator: 一处注解，多处使用
@@ -19,7 +17,7 @@ swagger-decorator，而不是本末倒置，一味地追求注解覆盖率。swa
 
 $ npm install swagger-decorator -S
 
-$
+$ npm install babel-plugin-transform-decorators-legacy -D
 
 # 使用 yarn 安装依赖
 
