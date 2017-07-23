@@ -467,6 +467,7 @@ export default class UserControllerDoc {
 
 ## RoadMap
 
+- 引入 [swagger-to-slate](https://github.com/lavkumarv/swagger-to-slate) 以支持 Slate 文档
 - 修复实体类自动生成中可能存在的错误
 - 复合类型推导
 - 接口数据自动校验

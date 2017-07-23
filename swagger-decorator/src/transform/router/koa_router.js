@@ -1,20 +1,20 @@
 // @flow
-const path = require("path");
-const debug = require("debug")("koa_router");
+const path = require('path');
+const debug = require('debug')('koa_router');
 
-import { buildSwaggerJSON } from "../../swagger/paths";
-import { swaggerJSON } from "../../swagger/template/swagger.json";
-import { swaggerHTML } from "../../swagger/template/swagger.html";
+import { buildSwaggerJSON } from '../../swagger/paths';
+import { swaggerJSON } from '../../swagger/template/swagger.json';
+import { swaggerHTML } from '../../swagger/template/swagger.html';
 
 const methods = [
-  "get",
-  "post",
-  "put",
-  "delete",
-  "head",
-  "options",
-  "del",
-  "all"
+  'get',
+  'post',
+  'put',
+  'delete',
+  'head',
+  'options',
+  'del',
+  'all'
 ];
 
 /**
@@ -26,14 +26,14 @@ const methods = [
  */
 export function wrappingKoaRouter(
   router: Object,
-  host: string = "localhost",
-  basePath: string = "",
+  host: string = 'localhost',
+  basePath: string = '',
   info: Object = {}
 ) {
   // 修复 SwaggerObject
   if (!!info) {
     for (let key of Object.keys(info)) {
-      swaggerJSON["info"][key] = info[key];
+      swaggerJSON['info'][key] = info[key];
     }
   }
 
@@ -42,12 +42,12 @@ export function wrappingKoaRouter(
   swaggerJSON.basePath = basePath;
 
   // 设置静态请求
-  router.get("/swagger", (ctx, next) => {
-    ctx.body = swaggerHTML("/swagger/api.json");
+  router.get('/swagger', (ctx, next) => {
+    ctx.body = swaggerHTML('/swagger/api.json');
   });
 
   // 设置 api.json 的请求
-  router.get("/swagger/api.json", function(ctx, next) {
+  router.get('/swagger/api.json', function(ctx, next) {
     // 构建 SwaggerJSON 文档
     buildSwaggerJSON();
 
@@ -61,21 +61,18 @@ export function wrappingKoaRouter(
   router.scan = function(StaticClass: Function) {
     let methods = Object.getOwnPropertyNames(StaticClass);
 
-    // 移除前三个属性 constructor、name
-    methods.shift();
-    methods.shift();
-    methods.shift();
-
     // 遍历该类中的所有方法
     for (let method of methods) {
-      // 添加权限校验
-      router.use(
-        basePath + StaticClass[method].path,
-        validate(StaticClass[method])
-      );
+      if (typeof method === 'function' && method.path) {
+        // 添加权限校验
+        router.use(
+          basePath + StaticClass[method].path,
+          validate(StaticClass[method])
+        );
 
-      // 使用该类中的所有方法
-      router.all(StaticClass[method]);
+        // 使用该类中的所有方法
+        router.all(StaticClass[method]);
+      }
     }
   };
 
@@ -89,7 +86,7 @@ export function wrappingKoaRouter(
       func: Function
     ) {
       // 如果 pathOrFunction 为字符串，则表示为正常调用
-      if (pathOrFunction && typeof pathOrFunction === "string") {
+      if (pathOrFunction && typeof pathOrFunction === 'string') {
         originMethod.call(router, pathOrFunction, func);
       } else {
         // 这里对于路径函数进行判断
