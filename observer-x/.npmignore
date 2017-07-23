@@ -1,1 +1,4 @@
-!dist/
+.idea
+
+# 发布到 NPM 仓库
+!dist

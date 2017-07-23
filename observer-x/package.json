@@ -1,6 +1,6 @@
 {
   "name": "observer-x",
-  "version": "0.0.1",
+  "version": "0.0.7",
   "description": "full-featured and efficient javascript object observer",
   "keywords": [
     "observable",
@@ -13,12 +13,9 @@
   "directories": {
     "test": "test"
   },
-  "files": ["src"],
   "main": "dist/observer-x.js",
-  "module": "src/index.js",
-  "main:next": "src/index.js",
   "scripts": {
-    "build": "cross-env BABEL_ENV=production && npm run build:umd && npm run build:es",
+    "build": "rm -rf dist/* && cross-env BABEL_ENV=production && npm run build:umd && npm run build:es",
     "build:es": "rollup -c rollup.es.config.js > dist/observer-x.es.js",
     "build:umd": "rollup -c rollup.config.js > dist/observer-x.js",
     "babel-node": "cross-env BABEL_ENV=test babel-node",
@@ -34,9 +31,8 @@
     "cross-env": "^5.0.1",
     "rollup": "^0.45.2",
     "rollup-plugin-babel": "^2.7.1",
-    "rollup-plugin-uglify": "^2.0.1"
-  },
-  "dependencies": {
+    "rollup-plugin-uglify": "^2.0.1",
     "rollup-plugin-flow": "^1.1.1"
-  }
+  },
+  "dependencies": {}
 }
