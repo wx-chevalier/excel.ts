@@ -53,10 +53,10 @@
     "koa": "^2.2.0",
     "koa-body": "^2.3.0",
     "koa-router": "^7.2.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "apollo-server-koa": "^1.0.4"
   },
   "dependencies": {
-    "apollo-server-koa": "^1.0.4",
     "babel-plugin-syntax-class-properties": "^6.13.0",
     "babel-plugin-syntax-decorators": "^6.13.0",
     "babel-plugin-syntax-flow": "^6.18.0",

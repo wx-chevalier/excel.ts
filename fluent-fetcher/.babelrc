@@ -1,0 +1,16 @@
+{
+  "presets": [
+    [
+      "es2015",
+      {
+        "module": false
+      }
+    ],
+    "flow",
+    "react"
+  ],
+  "plugins": [
+    "async-to-promises",
+    "transform-class-properties"
+  ]
+}
