@@ -1,7 +1,8 @@
 // @flow
 
-const Koa = require("koa");
-import router from "./router";
+const Koa = require('koa');
+
+import router from './router';
 
 const app = new Koa();
 

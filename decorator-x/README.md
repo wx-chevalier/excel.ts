@@ -123,21 +123,6 @@ export default class UserProperty {
 
 Swagger 内置数据类型定义：
 
-| Common Name | [`type`](http://swagger.io/specification/#dataTypeType) | [`format`](http://swagger.io/specification/#dataTypeFormat) | Comments                                 |
-| ----------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| integer     | `integer`                                | `int32`                                  | signed 32 bits                           |
-| long        | `integer`                                | `int64`                                  | signed 64 bits                           |
-| float       | `number`                                 | `float`                                  |                                          |
-| double      | `number`                                 | `double`                                 |                                          |
-| string      | `string`                                 |                                          |                                          |
-| byte        | `string`                                 | `byte`                                   | base64 encoded characters                |
-| binary      | `string`                                 | `binary`                                 | any sequence of octets                   |
-| boolean     | `boolean`                                |                                          |                                          |
-| date        | `string`                                 | `date`                                   | As defined by `full-date` - [RFC3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html#anchor14) |
-| dateTime    | `string`                                 | `date-time`                              | As defined by `date-time` - [RFC3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html#anchor14) |
-| password    | `string`                                 | `password`                               | Used to hint UIs the input needs to be obscured. |
-
-
 ## 实例生成与校验
 
 实体类定义完毕之后，我们首先可以使用 instantiate 函数为实体类生成实例；不同于直接使用 new 关键字创建，instantiate 能够根据指定属性的数据类型或者格式进行校验，同时能够迭代生成嵌套地子对象。

@@ -2,7 +2,7 @@
 
 import AnnouncementControllerDoc from "./AnnouncementControllerDoc";
 import {apiDescription, apiRequestMapping} from "../../src/swagger/decorator";
-import AnnouncementInterfaceEntity from "../entity/AnnouncementInterfaceEntity";
+import AnnouncementInterfaceEntity from "../entity/auth/AnnouncementInterfaceEntity";
 
 export default class AnnouncementController extends AnnouncementControllerDoc {
   @apiRequestMapping(

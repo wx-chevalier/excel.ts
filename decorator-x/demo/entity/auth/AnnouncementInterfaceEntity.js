@@ -1,6 +1,6 @@
 // @flow
 
-import { entityProperty } from "../../src/entity/decorator";
+import { entityProperty } from "../../../src/entity/decorator";
 
 /**
  * Description 公告列表实体类

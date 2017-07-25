@@ -6,6 +6,7 @@
     "jest"
   ],
   "plugins": [
+    "lodash",
     "transform-runtime",
     "transform-decorators-legacy",
     "transform-class-properties"

@@ -1,7 +1,8 @@
 // @flow
 
-import { entityProperty } from "../../src/entity/decorator";
+import { entityProperty } from "../../../src/entity/decorator";
 import UserProperty from "./UserProperty";
+
 /**
  * Description 用户实体类
  */

@@ -2,11 +2,49 @@
 # yarn lockfile v1
 
 
+"@types/accepts@*":
+  version "1.3.2"
+  resolved "http://registry.npm.taobao.org/@types/accepts/download/@types/accepts-1.3.2.tgz#52897ad5a51f05ea2f57f8e8136085c7d1c385a5"
+
+"@types/cookies@*":
+  version "0.6.1"
+  resolved "http://registry.npm.taobao.org/@types/cookies/download/@types/cookies-0.6.1.tgz#d12cbd0f8aa6b9f0d3bfb613b958897a0b348731"
+  dependencies:
+    "@types/keygrip" "*"
+    "@types/node" "*"
+
 "@types/geojson@^1.0.0":
   version "1.0.2"
   resolved "http://registry.npm.taobao.org/@types/geojson/download/@types/geojson-1.0.2.tgz#b02d10ab028e2928ac592a051aaa4981a1941d03"
 
-"@types/node@^6.0.48":
+"@types/graphql@^0.9.0", "@types/graphql@^0.9.1":
+  version "0.9.4"
+  resolved "http://registry.npm.taobao.org/@types/graphql/download/@types/graphql-0.9.4.tgz#cdeb6bcbef9b6c584374b81aa7f48ecf3da404fa"
+
+"@types/http-assert@*":
+  version "1.2.0"
+  resolved "http://registry.npm.taobao.org/@types/http-assert/download/@types/http-assert-1.2.0.tgz#0b82993036e86c6ff2944e033b73b57e85ccdcab"
+
+"@types/keygrip@*":
+  version "1.0.1"
+  resolved "http://registry.npm.taobao.org/@types/keygrip/download/@types/keygrip-1.0.1.tgz#ff540462d2fb4d0a88441ceaf27d287b01c3d878"
+
+"@types/koa-compose@*":
+  version "3.2.2"
+  resolved "http://registry.npm.taobao.org/@types/koa-compose/download/@types/koa-compose-3.2.2.tgz#dc106e000bbf92a3ac900f756df47344887ee847"
+
+"@types/koa@^2.0.39":
+  version "2.0.39"
+  resolved "http://registry.npm.taobao.org/@types/koa/download/@types/koa-2.0.39.tgz#45ba1249d8849b9b0ff8c1d6d2f80b0838b89ffa"
+  dependencies:
+    "@types/accepts" "*"
+    "@types/cookies" "*"
+    "@types/http-assert" "*"
+    "@types/keygrip" "*"
+    "@types/koa-compose" "*"
+    "@types/node" "*"
+
+"@types/node@*", "@types/node@^6.0.48":
   version "6.0.83"
   resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-6.0.83.tgz#dd022db01ac2c01c1057775e88ccffce96d1d6fe"
 
@@ -46,6 +84,26 @@ anymatch@^1.3.0:
   dependencies:
     arrify "^1.0.0"
     micromatch "^2.1.5"
+
+apollo-server-core@^1.0.2:
+  version "1.0.2"
+  resolved "http://registry.npm.taobao.org/apollo-server-core/download/apollo-server-core-1.0.2.tgz#6860a6b5680c42c8727153c524eefc84fb91e500"
+  optionalDependencies:
+    "@types/graphql" "^0.9.0"
+
+apollo-server-koa@^1.0.4:
+  version "1.0.4"
+  resolved "http://registry.npm.taobao.org/apollo-server-koa/download/apollo-server-koa-1.0.4.tgz#0dbe35acdc3bfdee6ad6b6675c08fa6c32eedb97"
+  dependencies:
+    apollo-server-core "^1.0.2"
+    apollo-server-module-graphiql "^1.0.4"
+  optionalDependencies:
+    "@types/graphql" "^0.9.1"
+    "@types/koa" "^2.0.39"
+
+apollo-server-module-graphiql@^1.0.4:
+  version "1.0.4"
+  resolved "http://registry.npm.taobao.org/apollo-server-module-graphiql/download/apollo-server-module-graphiql-1.0.4.tgz#d6db21a8c60f052649124da5cde1d88dab702319"
 
 aproba@^1.0.3:
   version "1.1.2"
@@ -323,6 +381,13 @@ babel-plugin-istanbul@^4.0.0:
 babel-plugin-jest-hoist@^20.0.3:
   version "20.0.3"
   resolved "http://registry.npm.taobao.org/babel-plugin-jest-hoist/download/babel-plugin-jest-hoist-20.0.3.tgz#afedc853bd3f8dc3548ea671fbe69d03cc2c1767"
+
+babel-plugin-lodash@^3.2.11:
+  version "3.2.11"
+  resolved "http://registry.npm.taobao.org/babel-plugin-lodash/download/babel-plugin-lodash-3.2.11.tgz#21c8fdec9fe1835efaa737873e3902bdd66d5701"
+  dependencies:
+    glob "^7.1.1"
+    lodash "^4.17.2"
 
 babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
@@ -991,6 +1056,10 @@ depd@1.1.0, depd@^1.1.0, depd@~1.1.0:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/depd/download/depd-1.1.0.tgz#e1bd82c6aab6ced965b97b88b17ed3e528ca18c3"
 
+deprecated-decorator@^0.1.6:
+  version "0.1.6"
+  resolved "http://registry.npm.taobao.org/deprecated-decorator/download/deprecated-decorator-0.1.6.tgz#00966317b7a12fe92f3cc831f7583af329b86c37"
+
 destroy@^1.0.3:
   version "1.0.4"
   resolved "http://registry.npm.taobao.org/destroy/download/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
@@ -1249,7 +1318,7 @@ glob-parent@^2.0.0:
   dependencies:
     is-glob "^2.0.0"
 
-glob@^7.0.0, glob@^7.0.5:
+glob@^7.0.0, glob@^7.0.5, glob@^7.1.1:
   version "7.1.2"
   resolved "http://registry.npm.taobao.org/glob/download/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
   dependencies:
@@ -1282,6 +1351,22 @@ got@^3.2.0:
 graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.4:
   version "4.1.11"
   resolved "http://registry.npm.taobao.org/graceful-fs/download/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
+
+graphql-tools@^1.1.0:
+  version "1.1.0"
+  resolved "http://registry.npm.taobao.org/graphql-tools/download/graphql-tools-1.1.0.tgz#8d86ea6997b0dea3089b62dc655e47146a663ebb"
+  dependencies:
+    deprecated-decorator "^0.1.6"
+    lodash "^4.3.0"
+    uuid "^3.0.1"
+  optionalDependencies:
+    "@types/graphql" "^0.9.0"
+
+graphql@^0.10.5:
+  version "0.10.5"
+  resolved "http://registry.npm.taobao.org/graphql/download/graphql-0.10.5.tgz#c9be17ca2bdfdbd134077ffd9bbaa48b8becd298"
+  dependencies:
+    iterall "^1.1.0"
 
 har-schema@^1.0.5:
   version "1.0.5"
@@ -1543,6 +1628,10 @@ istanbul-lib-instrument@^1.7.2:
     istanbul-lib-coverage "^1.1.1"
     semver "^5.3.0"
 
+iterall@^1.1.0:
+  version "1.1.1"
+  resolved "http://registry.npm.taobao.org/iterall/download/iterall-1.1.1.tgz#f7f0af11e9a04ec6426260f5019d9fcca4d50214"
+
 js-tokens@^3.0.0:
   version "3.0.2"
   resolved "http://registry.npm.taobao.org/js-tokens/download/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
@@ -1770,7 +1859,7 @@ lodash.restparam@^3.0.0:
   version "3.6.1"
   resolved "http://registry.npm.taobao.org/lodash.restparam/download/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
 
-lodash@^4.17.1, lodash@^4.2.0:
+lodash@^4.17.1, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0:
   version "4.17.4"
   resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -2147,11 +2236,7 @@ punycode@^1.4.1:
   version "1.4.1"
   resolved "http://registry.npm.taobao.org/punycode/download/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
-qs@^6.4.0:
-  version "6.5.0"
-  resolved "http://registry.npm.taobao.org/qs/download/qs-6.5.0.tgz#8d04954d364def3efc55b5a0793e1e2c8b1e6e49"
-
-qs@~6.4.0:
+qs@^6.4.0, qs@~6.4.0:
   version "6.4.0"
   resolved "http://registry.npm.taobao.org/qs/download/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
@@ -2657,7 +2742,7 @@ uuid@^2.0.1:
   version "2.0.3"
   resolved "http://registry.npm.taobao.org/uuid/download/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
 
-uuid@^3.0.0:
+uuid@^3.0.0, uuid@^3.0.1:
   version "3.1.0"
   resolved "http://registry.npm.taobao.org/uuid/download/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 

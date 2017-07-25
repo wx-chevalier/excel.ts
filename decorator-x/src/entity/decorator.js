@@ -34,7 +34,7 @@ export function entity(Class) {
  */
 export function entityProperty({
   // 生成接口文档需要的参数
-  type = 'string',
+  type = String,
   description = '',
   required = false,
   defaultValue = undefined,

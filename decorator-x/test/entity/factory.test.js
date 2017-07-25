@@ -1,7 +1,7 @@
 // @flow
 import { extractRulesFromClass, instantiate } from "../../src/entity/factory";
-import User from "../../demo/entity/User";
-import UserProperty from "../../demo/entity/UserProperty";
+import User from "../../demo/entity/auth/User";
+import UserProperty from "../../demo/entity/auth/UserProperty";
 
 describe("测试实体类信息抽取", () => {
   test("测试 User 类校验规则提取", () => {

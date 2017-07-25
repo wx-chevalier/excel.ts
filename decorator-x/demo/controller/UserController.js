@@ -8,7 +8,7 @@ import {
   pathParameter,
   queryParameter
 } from "../../src/swagger/decorator";
-import User from "../entity/User";
+import User from "../entity/auth/User";
 import UserControllerDoc from "./UserControllerDoc";
 
 /**

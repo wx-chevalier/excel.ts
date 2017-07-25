@@ -3,6 +3,13 @@ import type { InnerEntityProperty } from '../internal/types';
 
 // 定义所有的内部原始类型
 export const innerPrimitiveTypes = [
+  // JavaScript 内置的原始数据类型
+  Number,
+  String,
+  Boolean,
+  Date,
+
+  // Swagger 内置的原始数据类型
   'integer',
   'float',
   'double',
@@ -24,6 +31,13 @@ export function isPrimitive(type) {
     return innerPrimitiveTypes.includes(type);
   }
 }
+
+/**
+ * Description 将 JavaScript 内置的类型映射为 Swagger 类型
+ * @param type
+ * @param pattern
+ */
+export function mapJavaScriptTypeToSwagger(type, pattern = undefined) {}
 
 /**
  * Description 根据输入的实体类类型与内置的实体对象推测出实体属性

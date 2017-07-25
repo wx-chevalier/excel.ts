@@ -8,7 +8,7 @@ import {
   pathParameter,
   queryParameter
 } from "../../src/swagger/decorator";
-import User from "../entity/User";
+import User from "../entity/auth/User";
 
 export default class UserControllerDoc {
   @apiResponse(200, "get users successfully", [User])

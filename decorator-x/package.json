@@ -1,7 +1,7 @@
 {
-  "name": "swagger-decorator",
-  "version": "0.0.22",
-  "description": "Decorator for Koa2 and koa-router, Auto-Generate Swagger Docs",
+  "name": "decorator-x",
+  "version": "0.0.1",
+  "description": "decorator for entity instantiation & validation, auto-generate swagger docs & graphql schema",
   "main": "dist/index.node.js",
   "browser": "dist/index.web.js",
   "scripts": {
@@ -12,13 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wxyyxc1992/swagger-docorator"
+    "url": "https://github.com/wxyyxc1992/Modern-JavaScript-Entity"
   },
   "keywords": [
+    "JavaScript",
     "NodeJS",
     "Express",
     "Koa2",
-    "Swagger"
+    "Swagger",
+    "GraphQL"
   ],
   "author": "wxyyxc1992",
   "license": "ISC",
@@ -36,6 +38,7 @@
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
     "babel-loader": "^7.0.0",
+    "babel-plugin-lodash": "^3.2.11",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -53,10 +56,14 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "apollo-server-koa": "^1.0.4",
     "babel-plugin-syntax-class-properties": "^6.13.0",
     "babel-plugin-syntax-decorators": "^6.13.0",
     "babel-plugin-syntax-flow": "^6.18.0",
     "declarative-validator": "^0.0.2",
+    "graphql": "^0.10.5",
+    "graphql-tools": "^1.1.0",
+    "lodash": "^4.17.4",
     "path-to-regexp": "^1.7.0",
     "sequelize": "^4.2.1"
   }
