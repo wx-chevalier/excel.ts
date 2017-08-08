@@ -24,15 +24,17 @@
   "author": "wxyyxc1992",
   "license": "ISC",
   "devDependencies": {
+    "babel-jest": "^20.0.3",
     "babel-preset-env": "^1.6.0",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-jest": "^20.0.3",
     "babel-preset-stage-3": "^6.24.1",
     "cross-env": "^5.0.1",
+    "flow-bin": "^0.52.0",
     "rollup": "^0.45.2",
     "rollup-plugin-babel": "^2.7.1",
-    "rollup-plugin-uglify": "^2.0.1",
-    "rollup-plugin-flow": "^1.1.1"
+    "rollup-plugin-flow": "^1.1.1",
+    "rollup-plugin-uglify": "^2.0.1"
   },
   "dependencies": {}
 }

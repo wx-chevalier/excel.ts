@@ -1,10 +1,12 @@
 // @flow
 
+import { isArray } from './symbols';
+
 /**
  * Description 判断传入的是否为函数类型
- * @param fn
+ * @param fn ?Function
  */
-const checkFunctionType = (fn: any) => {
+const checkFunctionType = (fn: ?Function) => {
   const type = typeof fn;
   if (type !== 'function')
     throw `The observerX.listen method accepts as argument "typeof 'function'", "${type}" is not allowed`;
@@ -12,19 +14,28 @@ const checkFunctionType = (fn: any) => {
 
 /**
  * Description 根据输入的监听器暴露外部属性
- * @param listeners
+ * @param listenerMap
  */
-export const getAPIs = (listeners: WeakMap) => ({
+export const getAPIs = (listenerMap: WeakMap<Object, Array<Function>>) => ({
   /**
    * 设置对于某个对象或者数组的监听
    * @param   {Function} fn - 与待监听的属性相关的回调函数
    * @returns {API}
    */
-  listen(fn) {
+  listen(fn: Function) {
     checkFunctionType(fn);
 
-    if (!listeners.has(this)) listeners.set(this, []);
-    listeners.get(this).push(fn);
+    if (!listenerMap.has(this)) {
+      listenerMap.set(this, []);
+    }
+
+    let listeners = listenerMap.get(this);
+
+    if (listeners) {
+      listeners.push(fn);
+    } else {
+      throw new Error('Listener Array is invalid for' + this);
+    }
 
     return this;
   },
@@ -34,14 +45,14 @@ export const getAPIs = (listeners: WeakMap) => ({
    * @param   {Function} fn - 取消订阅的函数
    * @returns {API}
    */
-  unlisten(fn) {
-    const callbacks = listeners.get(this);
+  unlisten(fn: Function) {
+    const callbacks = listenerMap.get(this);
     if (!callbacks) return;
     if (fn) {
       const index = callbacks.indexOf(fn);
       if (~index) callbacks.splice(index, 1);
     } else {
-      listeners.set(this, []);
+      listenerMap.set(this, []);
     }
 
     return this;
@@ -51,7 +62,7 @@ export const getAPIs = (listeners: WeakMap) => ({
    * 将 observer-x 内置对象转化为 JSON 对象
    * @returns {Object} - JSON 对象
    */
-  toJSON(): JSON {
+  toJSON(): any {
     return Object.keys(this).reduce((ret, key) => {
       const value = this[key];
       ret[key] = value && value.toJSON ? value.toJSON() : value;

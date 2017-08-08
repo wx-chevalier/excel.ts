@@ -3,7 +3,7 @@
 
 # Observer-X
 
-本项目设计思想与部分代码实现逻辑借鉴了[ Icaro ](https://github.com/GianlucaGuarini/icaro) 以及[ Watch.JS ](https://github.com/melanke/Watch.JS)。目前 Observer-X 实现了基于 Proxy 的动态监测方案，正在准备完成基于 ES5 的 defineProperty 方案，尽可能保持二者 API 的一致性。
+本项目设计思想与部分代码实现逻辑借鉴了[ Icaro ](https://github.com/GianlucaGuarini/icaro) 以及[ Watch.JS ](https://github.com/melanke/Watch.JS)。目前 Observer-X 实现了基于 Proxy 的动态监测方案，正在准备完成基于 ES5 的 defineProperty 方案，尽可能保持二者 API 的一致性。
 
 ## Installation
 
@@ -94,4 +94,4 @@ counter.listen(update);
 
 # RoadMap
 
-[react-intersection-observer](https://github.com/thebuilder/react-intersection-observer)
+- [react-intersection-observer](https://github.com/thebuilder/react-intersection-observer)

@@ -1,35 +1,58 @@
 // @flow
 
-import { observe } from '../../dist/observer-x';
+import observe from '../../src/proxy/observe';
+import { changes } from '../../src/shared/symbols';
 
-const obj = observe(
-  {},
-  {
-    recursive: true
-  }
-);
+describe('测试根属性监听', () => {
+  it('基本数据类型监听', done => {
+    const obj = observe({ property: 'prop' });
 
-obj.property = {};
+    obj.listen(changes => {
+      expect(changes.get('property')).toEqual({
+        value: 'property',
+        oldValue: 'prop'
+      });
 
-obj.property.listen(changes => {
-  console.log(changes);
-  console.log('changes in obj');
+      done();
+    });
+    obj.property = 'property';
+  });
+
+  it('数组监听', done => {
+    const obj = observe({});
+
+    obj.arr = [1];
+
+    obj.arr.listen(changes => {
+      expect(changes.get('1')).toEqual({
+        value: 2,
+        oldValue: undefined
+      });
+
+      done();
+    });
+
+    obj.arr.push(2);
+
+    obj.arr.splice(0, 1, 3);
+  });
 });
 
-obj.property.name = 1;
+describe('测试子属性监听', () => {
+  it('子属性自动监听', (done: Function) => {
+    const obj = observe({});
 
-obj.property.arr = [];
+    obj.property = {};
 
-obj.property.arr.listen(changes => {
-  // console.log('changes in obj.arr');
+    obj.property.listen(changes => {
+      expect(changes.get('name')).toEqual({
+        value: 'name',
+        oldValue: undefined
+      });
+
+      done();
+    });
+
+    obj.property.name = 'name';
+  });
 });
-
-// changes in the single event loop will be print out
-
-setTimeout(() => {
-  obj.property.arr.push(1);
-
-  obj.property.arr.push(2);
-
-  obj.property.arr.splice(0, 0, 3);
-}, 500);

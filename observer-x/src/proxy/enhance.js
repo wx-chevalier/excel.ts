@@ -27,8 +27,8 @@ const API = getAPIs(listeners);
  * @returns {*} the object received enhanced with some extra properties
  */
 export function enhance(
-  obj,
-  { property = null, target = null, recursive = false } = {}
+  obj: ?Object,
+  { property = null, parentObj = null, recursive = false }: ObserveParams = {}
 ) {
   // 为对象添加部分内置属性
   Object.assign(obj, {
@@ -65,6 +65,7 @@ export function enhance(
      * @param oldValue
      */
     [dispatchTree](property, value, oldValue = undefined) {
+      // 调用该对象的 dispatch 函数
       obj[dispatch](property, value, oldValue);
 
       // 获取当前对象的父对象
