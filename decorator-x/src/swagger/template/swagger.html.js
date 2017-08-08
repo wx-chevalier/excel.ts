@@ -71,7 +71,7 @@ export const swaggerHTML = apiPath =>
   
   <a
     target="__blank"
-    href="https://github.com/wxyyxc1992/swagger-decorator"
+    href="https://github.com/wxyyxc1992/decorator-x"
     className="github-corner"
     aria-label="View source on Github"
   >

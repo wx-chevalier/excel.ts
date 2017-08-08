@@ -34,10 +34,13 @@ export function isPrimitive(type) {
 
 /**
  * Description 将 JavaScript 内置的类型映射为 Swagger 类型
- * @param type
- * @param pattern
+ * @param type 为类型的字符串表示或者构造函数表示
+ * @param pattern 校验规则
  */
-export function mapJavaScriptTypeToSwagger(type, pattern = undefined) {}
+export function mapJavaScriptTypeToSwagger(
+  type: string | Function,
+  pattern = undefined
+) {}
 
 /**
  * Description 根据输入的实体类类型与内置的实体对象推测出实体属性

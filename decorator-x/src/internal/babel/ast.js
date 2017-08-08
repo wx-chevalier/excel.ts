@@ -1,6 +1,6 @@
 // @flow
 
-import { innerPrimitiveTypes } from "../../entity/type";
+import { innerPrimitiveTypes } from '../../entity/type';
 /**
  * Description 生成导入语句
  * @param specifiers
@@ -9,19 +9,19 @@ import { innerPrimitiveTypes } from "../../entity/type";
  */
 export function generateImportDeclaration(specifiers: string, source: string) {
   return {
-    type: "ImportDeclaration",
+    type: 'ImportDeclaration',
     specifiers: [
       {
-        type: "ImportDefaultSpecifier",
+        type: 'ImportDefaultSpecifier',
         local: {
-          type: "Identifier",
+          type: 'Identifier',
           name: specifiers
         }
       }
     ],
-    importKind: "value",
+    importKind: 'value',
     source: {
-      type: "StringLiteral",
+      type: 'StringLiteral',
       value: source,
       rawValue: source,
       raw: `"${source}"`
@@ -51,44 +51,42 @@ export function generateDecoratorWithObjectParams(
   for (let key of Object.keys(objectParams)) {
     let value = objectParams[key];
 
-    if (!innerPrimitiveTypes.includes(value) && key !== "description") {
+    if (!innerPrimitiveTypes.includes(value) && key !== 'description') {
       value = {
-        type: "Identifier",
+        type: 'Identifier',
         name: value
       };
     } else {
       value = {
-        type: "StringLiteral",
+        type: 'StringLiteral',
         value
       };
     }
 
     properties.push({
-      type: "ObjectProperty",
+      type: 'ObjectProperty',
       method: false,
       shorthand: false,
       computed: false,
       key: {
-        type: "Identifier",
+        type: 'Identifier',
         name: key
       },
       value
     });
   }
 
-
-
   return {
-    type: "Decorator",
+    type: 'Decorator',
     expression: {
-      type: "CallExpression",
+      type: 'CallExpression',
       callee: {
-        type: "Identifier",
+        type: 'Identifier',
         name: calleeName
       },
       arguments: [
         {
-          type: "ObjectExpression",
+          type: 'ObjectExpression',
           properties
         }
       ]
@@ -109,20 +107,20 @@ export function extractFlowTypeFromClassProperty(classProperty) {
   }
 
   // 从 Flow 中获取类型
-  let type = "string";
+  let type = 'string';
 
   // 判断是否有类型声明
   if (classProperty.typeAnnotation) {
     let typeAnnotation = classProperty.typeAnnotation.typeAnnotation;
 
-    if (typeAnnotation.type === "NumberTypeAnnotation") {
-      type = "number";
-    } else if (typeAnnotation.type === "StringTypeAnnotation") {
-      type = "string";
-    } else if (typeAnnotation.type === "GenericTypeAnnotation") {
+    if (typeAnnotation.type === 'NumberTypeAnnotation') {
+      type = 'number';
+    } else if (typeAnnotation.type === 'StringTypeAnnotation') {
+      type = 'string';
+    } else if (typeAnnotation.type === 'GenericTypeAnnotation') {
       type = typeAnnotation.id.name;
     } else {
-      return "string;";
+      return 'string;';
     }
   }
 
@@ -130,9 +128,11 @@ export function extractFlowTypeFromClassProperty(classProperty) {
 
   // 判断是否有注释
   if (classProperty.leadingComments) {
-    comment = classProperty.leadingComments.reduce((value,obj)=>{
-      return `${value}\n${obj.value}`
-    },"").trim();
+    comment = classProperty.leadingComments
+      .reduce((value, obj) => {
+        return `${value}\n${obj.value}`;
+      }, '')
+      .trim();
   }
 
   return {

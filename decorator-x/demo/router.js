@@ -4,7 +4,7 @@ const koaBody = require('koa-body');
 import { graphqlKoa, graphiqlKoa } from 'apollo-server-koa';
 import { graphqlSchema } from './graphql/graphql';
 import UserController from './controller/UserController';
-import { wrappingKoaRouter } from '../src/transform/router/koa_router';
+import { wrappingKoaRouter } from '../src/transform/router/koa-router';
 import AnnouncementController from './controller/AnnouncementController';
 const Router = require('koa-router');
 

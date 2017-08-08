@@ -1,6 +1,6 @@
 // @flow
 
-import { entityProperty } from 'swagger-decorator';
+import { entityProperty } from 'decorator-x';
 
 import AnotherEntity from './AnotherEntity';
 

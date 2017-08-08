@@ -13,5 +13,5 @@ export {
   queryParameter,
   apiResponse
 } from "./swagger/decorator";
-export { wrappingKoaRouter } from "./transform/router/koa_router";
+export { wrappingKoaRouter } from "./transform/router/koa-router";
 export { generateSequelizeModel } from "./transform/entity/sequelize";

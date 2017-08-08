@@ -1,0 +1,15 @@
+[ignore]
+.*/node_modules/.*
+.*/dist/.*
+.*/test/.*
+.*/demo/.*
+.*/*.json
+
+[include]
+./flow
+
+[libs]
+
+[options]
+
+[lints]

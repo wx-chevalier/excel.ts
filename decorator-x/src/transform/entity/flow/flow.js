@@ -23,7 +23,7 @@ export function flowToDecoratorPlugin(babel) {
         path.node.body.splice(
           0,
           0,
-          generateImportDeclaration('{ entityProperty }', 'swagger-decorator')
+          generateImportDeclaration('{ entityProperty }', 'decorator-x')
         );
       },
 

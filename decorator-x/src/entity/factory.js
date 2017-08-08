@@ -1,7 +1,8 @@
 // @flow
 import { innerEntityObject } from '../internal/singleton';
-import { innerPrimitiveTypes, isPrimitive } from './type';
+import { isPrimitive } from './type';
 import { validate } from 'declarative-validator';
+
 const debug = require('debug')('factory');
 
 /**
@@ -17,12 +18,14 @@ export function instantiate(
   data: {
     [string]: any
   },
-  { ignore = false, strict = true }: { ignore: boolean, strict: boolean } = {}
+  { ignore = false, strict = true }: InstantiateOption = {}
 ): Object {
+  // 获取到该实体类对应的内部注解信息存放对象
   const innerObject = innerEntityObject[EntityClass.name];
 
   debug(innerObject);
 
+  // 该对象的属性列表
   const innerObjectProperties = innerObject.properties;
 
   let validation = {
@@ -52,7 +55,7 @@ export function instantiate(
       // 首先判断该属性是否在预定义的属性内
       if (!innerObjectProperties.hasOwnProperty(property)) {
         if (strict) {
-          // 严格模式下忽略该数据
+          // 严格模式下忽略该属性
           continue;
         } else {
           // 否则直接当做新数据挂载上去
@@ -61,6 +64,7 @@ export function instantiate(
         }
       }
 
+      // 获取该属性的类型
       let type = innerObjectProperties[property].type;
 
       // 判断是否为原始类型
@@ -78,6 +82,7 @@ export function instantiate(
           });
         }
       } else {
+        // 如果为自定义的复合类型，则递归生成属性对象
         // 判断是否为数组
         if (type === 'array' || Array.isArray(type)) {
           // 如果为数组则返回数组
@@ -101,10 +106,10 @@ export function instantiate(
 }
 
 /**
- * Description 从
+ * Description 从实体类中提取出校验规则
  * @param EntityClass
  */
-export function extractRulesFromClass(EntityClass) {
+export function extractRulesFromClass(EntityClass: Function) {
   const innerObject = innerEntityObject[EntityClass.name];
 
   const rules = {};
