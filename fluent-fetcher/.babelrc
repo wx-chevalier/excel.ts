@@ -10,7 +10,6 @@
     "react"
   ],
   "plugins": [
-    "async-to-promises",
     "transform-class-properties"
   ]
 }

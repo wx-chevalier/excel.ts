@@ -1,7 +1,7 @@
 // @flow
 
 // 判断是否为 Node 环境
-const isNode: boolean = typeof process !== "undefined";
+const isNode: boolean = typeof process !== 'undefined';
 
 type strategyType = {
   // 是否需要添加进度监听回调，常用于下载
@@ -23,11 +23,11 @@ let strategyInstance;
 export default function execute(
   url: string,
   option: any = {},
-  acceptType: "json" | "text" | "blob" = "json",
+  acceptType: 'json' | 'text' | 'blob' = 'json',
   strategy: strategyType = {}
 ): Promise<any> {
   if (!url) {
-    throw new Error("地址未定义");
+    throw new Error('地址未定义');
   }
 
   let promise: Promise<any>;
@@ -39,9 +39,9 @@ export default function execute(
     promise = fetch(url);
   } else {
     // 这里判断是否为 Node 环境，是 Node 环境则设置环境变量
-    if (typeof process !== "undefined") {
+    if (typeof process !== 'undefined') {
       // 避免 HTTPS 错误
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     }
 
     //构建fetch请求
@@ -59,9 +59,9 @@ export default function execute(
     .then(
       response => {
         // 根据不同的数据类型启用不同的解析方式
-        if (acceptType === "json") {
+        if (acceptType === 'json') {
           return _parseJSON(response);
-        } else if (acceptType === "blob") {
+        } else if (acceptType === 'blob') {
           return _parseBlob(response);
         } else {
           return _parseText(response);
@@ -83,25 +83,24 @@ export default function execute(
  * @param acceptType
  * @returns {*}
  */
-async function _checkStatus(response, acceptType) {
+function _checkStatus(response, acceptType) {
   if (
-    (response.status >= 200 && response.status < 300) || response.status === 0
+    (response.status >= 200 && response.status < 300) ||
+    response.status === 0
   ) {
     return response;
   } else {
-    // 获取响应体
-    let body = acceptType === "json"
-      ? await response.json()
-      : await response.text();
-
     // 封装错误对象
-    throw new Error(
+    let error = new Error(
       JSON.stringify({
         status: response.status,
-        statusText: response.statusText,
-        body: body
+        statusText: response.statusText
       })
     );
+
+    error.response = response;
+
+    throw error;
   }
 }
 
@@ -127,7 +126,7 @@ function _parseText(response: Response): Promise<string> | string {
   if (!!response) {
     return response.text();
   } else {
-    return "";
+    return '';
   }
 }
 
@@ -162,7 +161,7 @@ function _decorate(initialpromise: Promise<any>): Promise<any> {
   let abortablePromise = new Promise((resolve, reject) => {
     // 闭包方式传递对象
     abortFunction = () => {
-      reject(new Error("Abort or Timeout"));
+      reject(new Error('Abort or Timeout'));
     };
   });
 
@@ -187,7 +186,7 @@ function _decorate(initialpromise: Promise<any>): Promise<any> {
           );
         } else {
           if (!fs) {
-            console.error("fs is null!");
+            console.error('fs is null!');
             return;
           }
 
@@ -205,7 +204,7 @@ function _decorate(initialpromise: Promise<any>): Promise<any> {
   };
 
   // 定义 timeout 对象
-  Object.defineProperty(promise, "timeout", {
+  Object.defineProperty(promise, 'timeout', {
     set: function(ts) {
       if ((ts = +ts)) {
         timeout = ts;
@@ -217,7 +216,7 @@ function _decorate(initialpromise: Promise<any>): Promise<any> {
     }
   });
 
-  if (strategyInstance.hasOwnProperty("timeout")) {
+  if (strategyInstance.hasOwnProperty('timeout')) {
     promise.timeout = strategyInstance.timeout;
   }
 
