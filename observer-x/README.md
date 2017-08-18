@@ -5,6 +5,11 @@
 
 本项目设计思想与部分代码实现逻辑借鉴了[ Icaro ](https://github.com/GianlucaGuarini/icaro) 以及[ Watch.JS ](https://github.com/melanke/Watch.JS)。目前 Observer-X 实现了基于 Proxy 的动态监测方案，正在准备完成基于 ES5 的 defineProperty 方案，尽可能保持二者 API 的一致性。
 
+Proxy 两种实现方案都使用了 Symbol 与 Map/Set 特性，如果需要在 IE10 以下浏览器使用，需要引入 Polyfill；Proxy 的适用范围如下：
+
+![](https://coding.net/u/hoteam/p/Cache/git/raw/master/2017/8/1/WX20170808-212941.png)
+
+
 ## Installation
 
 - 标签方式引入

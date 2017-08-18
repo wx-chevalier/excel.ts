@@ -3,12 +3,13 @@
 .*/dist/.*
 .*/test/.*
 .*/demo/.*
-.*/*.json
+.*/**/*.json
 
 [include]
-./flow
+
 
 [libs]
+./flow-typed
 
 [options]
 

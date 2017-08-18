@@ -6,7 +6,7 @@
  * @param   {String} key - property name
  * @param   {*} value - value to set
  */
-export function defineProp(obj: any, key: string, value: any): void {
+export function definePrivateProp(obj: any, key: string, value: any): void {
   Object.defineProperty(obj, key, {
     value,
     enumerable: false,

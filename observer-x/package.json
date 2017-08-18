@@ -15,6 +15,7 @@
   },
   "main": "dist/observer-x.js",
   "scripts": {
+    "prepublish": "npm run build",
     "build": "rm -rf dist/* && cross-env BABEL_ENV=production && npm run build:umd && npm run build:es",
     "build:es": "rollup -c rollup.es.config.js > dist/observer-x.es.js",
     "build:umd": "rollup -c rollup.config.js > dist/observer-x.js",

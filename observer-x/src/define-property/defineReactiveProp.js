@@ -3,7 +3,7 @@
 /**
  * Define a reactive property on an Object.
  */
-export function enhance(
+export function defineReactiveProp(
   obj: Object,
   key: string,
   val: any,

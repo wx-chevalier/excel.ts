@@ -45,6 +45,8 @@ import {
 ## RoadMap
 
 - 引入 [swagger-to-slate](https://github.com/lavkumarv/swagger-to-slate) 以支持 Slate 文档
+- 添加自动生成 ImmutableJS 对象的功能
+- 添加依赖注入的功能
 - 对于初始化生成函数 instantiate 添加 Null Propagation 支持
 - 修复实体类自动生成中可能存在的错误
 - 复合类型推导

@@ -1,20 +1,18 @@
 // @flow
 
 import {
-  objTree,
+  changes,
   dispatch,
   dispatchTree,
   isObserveX,
-  timer,
+  isRecrusive,
   listeners,
-  isArray,
-  changes,
-  isRecrusive
-} from '../shared/symbols';
+  objTree,
+  timer
+} from './symbols';
 
-import { defineProp } from '../shared/utils';
-import { getAPIs } from '../shared/api';
-import { ProxyHandler } from './observe';
+import { definePrivateProp } from './utils';
+import { getAPIs } from './api';
 
 const API = getAPIs(listeners);
 
@@ -82,21 +80,8 @@ export function enhance(
 
   // 将暴露出去的公共接口绑定到原始对象
   Object.keys(API).forEach(function(key) {
-    defineProp(obj, key, API[key].bind(obj));
+    definePrivateProp(obj, key, API[key].bind(obj));
   });
-
-  // 重新映射值与方法，这里对于数组进行了额外处理
-  if (Array.isArray(obj)) {
-    obj[isArray] = true;
-    // 重新映射数组初始值
-    obj.forEach(function(item, i) {
-      obj[i] = null; // 强制重置
-
-      // 这里为了避免数组中存在对象值，因此依次对于数组中的对象进行设置操作
-      // 数组可以看做属性为下标的对象
-      ProxyHandler.set(obj, i, item);
-    });
-  }
 
   return obj;
 }
