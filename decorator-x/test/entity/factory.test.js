@@ -1,5 +1,5 @@
 // @flow
-import { extractRulesFromClass, instantiate } from "../../src/entity/factory";
+import { extractRulesFromClass, instantiate } from "../../src/entity/factory/factory";
 import User from "../../demo/entity/auth/User";
 import UserProperty from "../../demo/entity/auth/UserProperty";
 

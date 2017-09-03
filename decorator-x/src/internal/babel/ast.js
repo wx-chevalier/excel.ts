@@ -1,6 +1,6 @@
 // @flow
 
-import { innerPrimitiveTypes } from '../../entity/type';
+import { innerPrimitiveTypes } from '../../entity/common/type';
 /**
  * Description 生成导入语句
  * @param specifiers

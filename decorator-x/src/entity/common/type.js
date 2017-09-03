@@ -1,5 +1,5 @@
 // @flow
-import type { InnerEntityProperty } from '../internal/types';
+import type { InnerEntityProperty } from '../../internal/types';
 
 // 定义所有的内部原始类型
 export const innerPrimitiveTypes = [
@@ -24,7 +24,7 @@ export const innerPrimitiveTypes = [
  * @param type
  * @return {boolean}
  */
-export function isPrimitive(type) {
+export function isPrimitive(type: Array<string> | string) {
   if (Array.isArray(type)) {
     return innerPrimitiveTypes.includes(type[0]);
   } else {

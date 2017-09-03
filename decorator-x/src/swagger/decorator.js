@@ -9,7 +9,7 @@ import { buildDefinitions } from "./definitions";
  * @returns {Function}
  */
 export function apiRequestMapping(method: string, path: string) {
-  return function(target, key, descriptor) {
+  return function(  target: any,  key: string,  descriptor: Object) {
     let apiKey = `${target.name}-${key}`;
 
     // 设置请求方法
@@ -17,7 +17,7 @@ export function apiRequestMapping(method: string, path: string) {
     // 设置请求路径
     descriptor.value.path = path;
 
-    _initializeInnerAPIObject(target, key, descriptor);
+    _initializeInnerAPIObject(  target: any,  key: string,  descriptor: Object);
 
     innerAPIObject[apiKey].requestMapping = {
       method,
@@ -38,10 +38,10 @@ export function apiDescription(
   description: string,
   produces: [string] = ["application/json"]
 ) {
-  return function(target, key, descriptor) {
+  return function(  target: any,  key: string,  descriptor: Object) {
     let apiKey = `${target.name}-${key}`;
 
-    _initializeInnerAPIObject(target, key, descriptor);
+    _initializeInnerAPIObject(  target: any,  key: string,  descriptor: Object);
 
     innerAPIObject[apiKey].description = {
       description,
@@ -71,10 +71,10 @@ export function pathParameter({
   type: string,
   defaultValue: any
 }) {
-  return function(target, key, descriptor) {
+  return function(  target: any,  key: string,  descriptor: Object) {
     let apiKey = `${target.name}-${key}`;
 
-    _initializeInnerAPIObject(target, key, descriptor);
+    _initializeInnerAPIObject(  target: any,  key: string,  descriptor: Object);
 
     innerAPIObject[apiKey].pathParameter ||
       (innerAPIObject[apiKey].pathParameter = []);
@@ -116,10 +116,10 @@ export function queryParameter({
   type: any,
   items: any
 }) {
-  return function(target, key, descriptor) {
+  return function(  target: any,  key: string,  descriptor: Object) {
     let apiKey = `${target.name}-${key}`;
 
-    _initializeInnerAPIObject(target, key, descriptor);
+    _initializeInnerAPIObject(  target: any,  key: string,  descriptor: Object);
 
     innerAPIObject[apiKey].queryParameter ||
       (innerAPIObject[apiKey].queryParameter = []);
@@ -157,10 +157,10 @@ export function bodyParameter({
   required: boolean,
   schema: any
 }) {
-  return function(target, key, descriptor) {
+  return function(  target: any,  key: string,  descriptor: Object) {
     let apiKey = `${target.name}-${key}`;
 
-    _initializeInnerAPIObject(target, key, descriptor);
+    _initializeInnerAPIObject(  target: any,  key: string,  descriptor: Object);
 
     innerAPIObject[apiKey].bodyParameter ||
       (innerAPIObject[apiKey].bodyParameter = []);
@@ -192,10 +192,10 @@ export function apiResponse(
   description: string,
   schema: any
 ) {
-  return function(target, key, descriptor) {
+  return function(  target: any,  key: string,  descriptor: Object) {
     let apiKey = `${target.name}-${key}`;
 
-    _initializeInnerAPIObject(target, key, descriptor);
+    _initializeInnerAPIObject(  target: any,  key: string,  descriptor: Object);
 
     innerAPIObject[apiKey].responses || (innerAPIObject[apiKey].responses = []);
 
@@ -219,7 +219,7 @@ export function apiResponse(
  * @param descriptor
  * @private
  */
-function _initializeInnerAPIObject(target, key, descriptor) {
+function _initializeInnerAPIObject(  target: any,  key: string,  descriptor: Object) {
   let apiKey = `${target.name}-${key}`;
 
   if (!innerAPIObject[apiKey]) {

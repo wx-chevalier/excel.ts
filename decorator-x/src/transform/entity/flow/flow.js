@@ -12,13 +12,13 @@ import {
   generateImportDeclaration
 } from '../../../internal/babel/ast';
 
-export function flowToDecoratorPlugin(babel) {
+export function flowToDecoratorPlugin(babel: any) {
   const { types: t } = babel;
 
   return {
     name: 'flow-to-decorator-ast-transform', // not required
     visitor: {
-      Program(path) {
+      Program(path: any) {
         // 添加头部导入库
         path.node.body.splice(
           0,
@@ -27,7 +27,7 @@ export function flowToDecoratorPlugin(babel) {
         );
       },
 
-      ClassProperty(path, state) {
+      ClassProperty(path: any, state: any) {
         // 判断当前是否已经存在注解，如果不存在则动态创建
         if (!path.node.decorators) {
           let typeAndValue = extractFlowTypeFromClassProperty(path.node);
@@ -56,7 +56,7 @@ export function flowToDecoratorPlugin(babel) {
  */
 export async function flowToDecorator(
   fileName: string,
-  destFileName: string = undefined
+  destFileName?: ?string = undefined
 ) {
   let codeStr = (await readFileAsync(fileName)).toString();
 

@@ -3,8 +3,8 @@ const path = require('path');
 const debug = require('debug')('koa_router');
 
 import { buildSwaggerJSON } from '../../swagger/paths';
-import { swaggerJSON } from '../../swagger/template/swagger.json';
-import { swaggerHTML } from '../../swagger/template/swagger.html';
+import { swaggerJSON } from '../../swagger/template/swagger.json.js';
+import { swaggerHTML } from '../../swagger/template/swagger.html.js';
 
 const methods = [
   'get',
@@ -82,7 +82,12 @@ export function wrappingKoaRouter(
 
     // Hook 原 router 对象的方法，使其能够读取到函数的配置信息
     router[method] = function(
-      pathOrFunction: string | Function,
+      pathOrFunction:
+        | string
+        | {
+            path: string,
+            method: string
+          },
       func: Function
     ) {
       // 如果 pathOrFunction 为字符串，则表示为正常调用
@@ -90,7 +95,7 @@ export function wrappingKoaRouter(
         originMethod.call(router, pathOrFunction, func);
       } else {
         // 这里对于路径函数进行判断
-        if (!pathOrFunction.method || !pathOrFunction.path) {
+        if (!pathOrFunction.method || typeof pathOrFunction.path !== 'string') {
           return;
         }
 

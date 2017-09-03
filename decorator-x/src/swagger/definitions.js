@@ -1,7 +1,7 @@
 // @flow
 
 import { swaggerJSON } from "./template/swagger.json";
-import { inferenceEntityProperties } from "../entity/type";
+import { inferenceEntityProperties } from "../entity/common/type";
 import { innerEntityObject } from "../internal/singleton";
 /**
  * Description 构建实例定义

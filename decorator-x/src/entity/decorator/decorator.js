@@ -1,6 +1,6 @@
 // @flow
-import { innerEntityObject } from '../internal/singleton';
-import { buildDefinitions } from '../swagger/definitions';
+import { innerEntityObject } from '../../internal/singleton';
+import { buildDefinitions } from '../../swagger/definitions';
 
 /**
  * Description 生成实体类的唯一标识，这里首先默认使用实体类名作为唯一标识
@@ -8,7 +8,11 @@ import { buildDefinitions } from '../swagger/definitions';
  * @param key
  * @param descriptor
  */
-export function generateEntityUUID(target, key, descriptor) {
+export function generateEntityUUID(
+  target: any,
+  key: string,
+  descriptor: Object
+) {
   return target.constructor.name;
 }
 
@@ -17,10 +21,24 @@ export function generateEntityUUID(target, key, descriptor) {
  * @param Class
  * @returns {*}
  */
-export function entity(Class) {
+export function entity(Class: Function) {
   new Class();
   return Class;
 }
+
+export type EntityPropertyParams = {
+  // 生成接口文档需要的参数
+  type?: 'string',
+  description?: 'string',
+  required?: boolean,
+  defaultValue?: any,
+
+  // 进行校验所需要的参数
+  pattern?: 'string',
+
+  // 进行数据库连接需要的参数
+  primaryKey?: boolean
+};
 
 /**
  * Description 创建某个属性的描述
@@ -34,7 +52,7 @@ export function entity(Class) {
  */
 export function entityProperty({
   // 生成接口文档需要的参数
-  type = String,
+  type = 'string',
   description = '',
   required = false,
   defaultValue = undefined,
@@ -44,9 +62,13 @@ export function entityProperty({
 
   // 进行数据库连接需要的参数
   primaryKey = false
-}) {
-  return function(target, key, descriptor) {
-    let entityUUID = generateEntityUUID(target, key, descriptor);
+}: EntityPropertyParams) {
+  return function(target: any, key: string, descriptor: Object) {
+    let entityUUID = generateEntityUUID(
+      (target: any),
+      (key: string),
+      (descriptor: Object)
+    );
 
     // 确保实体键存在
     _ensure(entityUUID, key);

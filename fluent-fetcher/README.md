@@ -363,7 +363,13 @@ describe("Pipe 测试", () => {
 
 ```
 
-# Contribution & RoadMap
+# About
+
+## Motivation
+
+- [r2](https://github.com/mikeal/r2/tree/master): HTTP client. Spiritual successor to request.
+
+## Contribution & RoadMap
 
 如果我们需要进行本地调试，则可以在当前模块目录下使用 `npm link` 来创建本地链接：
 

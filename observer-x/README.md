@@ -97,6 +97,13 @@ counter.listen(update);
 })();
 ```
 
-# RoadMap
+# About 
+
+## RoadMap
+
+- 添加 ES5 defineProperty 的支持
+- 添加依赖图管理
+
+## Reference
 
 - [react-intersection-observer](https://github.com/thebuilder/react-intersection-observer)

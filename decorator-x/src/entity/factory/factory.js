@@ -1,9 +1,12 @@
 // @flow
-import { innerEntityObject } from '../internal/singleton';
-import { isPrimitive } from './type';
+import { innerEntityObject } from '../../internal/singleton';
+import { isPrimitive } from '../common/type';
 import { validate } from 'declarative-validator';
 
 const debug = require('debug')('factory');
+
+// 初始化配置
+export type InstantiateOption = { ignore: boolean, strict: boolean };
 
 /**
  * Description 从实体类中生成对象，并且进行数据校验；注意，这里会进行递归生成，即对实体类对象同样进行生成

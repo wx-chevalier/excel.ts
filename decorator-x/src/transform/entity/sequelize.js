@@ -1,9 +1,9 @@
 // @flow
-const debug = require("debug")("sequelize");
-const Sequelize = require("sequelize");
+const debug = require('debug')('sequelize');
+const Sequelize = require('sequelize');
 
-import { inferenceEntityProperties } from "../../entity/type";
-import { innerEntityObject } from "../../internal/singleton";
+import { inferenceEntityProperties } from '../../entity/common/type';
+import { innerEntityObject } from '../../internal/singleton';
 
 /**
  * Description 构造 Sequelize 模型
@@ -12,8 +12,8 @@ import { innerEntityObject } from "../../internal/singleton";
  * @param mappingCamelCaseToUnderScore: 是否需要将 CamelCase 映射到 UnderScore
  */
 export function generateSequelizeModel(
-  EntityClass,
-  manuelDefinition,
+  EntityClass: Function,
+  manuelDefinition: any,
   {
     mappingCamelCaseToUnderScore = false
   }: {
@@ -29,13 +29,13 @@ export function generateSequelizeModel(
     [string]: any
   } = {};
 
-  for (let property in Object.keys(properties)) {
+  for (let property of Object.keys(properties)) {
     let sequelizeProperty: string;
 
     // 判断是否需要进行格式转换
     if (mappingCamelCaseToUnderScore) {
       sequelizeProperty = property.replace(/([A-Z])/g, function($1) {
-        return "_" + $1.toLowerCase();
+        return '_' + $1.toLowerCase();
       });
     } else {
       sequelizeProperty = property;
@@ -65,15 +65,15 @@ export function generateSequelizeModel(
  * @private
  */
 function _mapType(type: string) {
-  if (type === "integer") {
+  if (type === 'integer') {
     return Sequelize.INTEGER;
-  } else if (type === "string") {
+  } else if (type === 'string') {
     return Sequelize.STRING;
-  } else if (type === "boolean") {
+  } else if (type === 'boolean') {
     return Sequelize.BOOLEAN;
-  } else if (type === "dateTime" || type === "date") {
+  } else if (type === 'dateTime' || type === 'date') {
     return Sequelize.DATE;
-  } else if (type === "object" || type === "array") {
+  } else if (type === 'object' || type === 'array') {
     return Sequelize.STRING;
   }
 }

@@ -48,6 +48,7 @@
     "babel-preset-stage-3": "^6.24.1",
     "chai": "^4.0.2",
     "debug": "^2.6.8",
+    "flow-bin": "^0.53.1",
     "koa": "^2.2.0",
     "koa-body": "^2.3.0",
     "koa-router": "^7.2.1",
