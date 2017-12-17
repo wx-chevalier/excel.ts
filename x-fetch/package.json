@@ -1,16 +1,18 @@
 {
-  "name": "fluent-fetcher",
-  "version": "0.3.3",
+  "name": "x-fetch",
+  "version": "0.0.1",
   "description": "Fluent API And Advanced Feature Support For isomorphic-fetch",
   "main": "dist/index.js",
   "scripts": {
     "prepublish": "npm run build",
-    "build": "rm -rf dist && node_modules/babel-cli/bin/babel.js src --out-dir dist",
+    "build":
+      "rm -rf dist && node_modules/babel-cli/bin/babel.js src --out-dir dist",
     "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wxyyxc1992/Web-Development-And-Engineering-Practices"
+    "url":
+      "https://github.com/wxyyxc1992/Web-Development-And-Engineering-Practices"
   },
   "keywords": ["fetch", "fluent", "super-agent", "cache", "timeout"],
   "author": "wxyyxc1992",
