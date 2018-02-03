@@ -376,9 +376,11 @@ describe("Pipe 测试", () => {
 
 # About
 
-## Motivation
+## Acknowledge
 
 * [r2](https://github.com/mikeal/r2/tree/master): HTTP client. Spiritual successor to request.
+
+* [wretch](https://github.com/elbywan/wretch)
 
 ## Contribution & RoadMap
 
