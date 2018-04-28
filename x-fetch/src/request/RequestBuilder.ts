@@ -1,39 +1,23 @@
-// @flow
-const urlencode = require("isomorphic-urlencode");
-
-/**
- * @region 类型定义
- */
-export type RequestType = {
-  // 请求地址
-  url: string,
-
-  // fetch 使用的配置
-  option: { [string]: any }
-};
-
-/**
- * @endregion 类型定义
- */
+const urlencode = require('isomorphic-urlencode');
 
 export default class RequestBuilder {
   // 当前协议名
-  scheme: string = "http";
+  scheme: string = 'http';
 
   // 当前主机
-  host: string = "api.com";
+  host: string = 'api.com';
 
   // 当前编码
-  encoding: string = "utf8";
+  encoding: string = 'utf8';
 
   // 请求路径
-  path: string = "/";
+  path: string = '/';
 
   // cookie 参数
-  cookieParams: { [string]: any } = {};
+  cookieParams: { [key: string]: any } = {};
 
   // 最后封装而成的 option
-  _option: { [string]: any } = {};
+  _option: { [key: string]: any } = {};
 
   /**
    * @function 默认构造函数
@@ -54,13 +38,13 @@ export default class RequestBuilder {
    * @key 请求键名或者存放键值的对象
    * @value 请求值名
    */
-  header(key: string | Object = "Accept", value: string = "application/json") {
+  header(key: string | Object = 'Accept', value: string = 'application/json') {
     // 判断当前是否存在头配置
     if (!this._option.headers) {
       this._option.headers = {};
     }
 
-    if (typeof key === "string") {
+    if (typeof key === 'string') {
       this._option.headers[key] = value;
     } else {
       this._option.headers = Object.assign({}, this._option.headers, key);
@@ -71,9 +55,9 @@ export default class RequestBuilder {
   }
 
   //这里输入的path是不会进行编码的,因此不要输入一些动态参数
-  get(path: string = "/") {
+  get(path: string = '/') {
     //封装请求类型
-    this._method("get", path);
+    this._method('get', path);
 
     //重置body，避免之前使用过post
     this._option.body = null;
@@ -89,16 +73,16 @@ export default class RequestBuilder {
    * @return {RequestBuilder}
    */
   post(
-    path: string = "/",
+    path: string = '/',
     params: Object = {},
-    contentType: string = "json"
+    contentType: string = 'json'
   ): RequestBuilder {
     //判断是否已经封装过了请求方法
     if (!params) {
-      throw new Error("请设置有效请求参数");
+      throw new Error('请设置有效请求参数');
     }
 
-    this._method("post", path, params, contentType);
+    this._method('post', path, params, contentType);
 
     return this;
   }
@@ -111,16 +95,16 @@ export default class RequestBuilder {
    * @return {RequestBuilder}
    */
   put(
-    path: string = "/",
+    path: string = '/',
     params: Object = {},
-    contentType: string = "json"
+    contentType: string = 'json'
   ): RequestBuilder {
     //判断是否已经封装过了请求方法
     if (!params) {
-      throw new Error("请设置有效请求参数");
+      throw new Error('请设置有效请求参数');
     }
 
-    this._method("put", path, params, contentType);
+    this._method('put', path, params, contentType);
 
     return this;
   }
@@ -133,16 +117,16 @@ export default class RequestBuilder {
    * @return {RequestBuilder}
    */
   delete(
-    path: string = "/",
+    path: string = '/',
     params: Object = {},
-    contentType: string = "json"
+    contentType: string = 'json'
   ): RequestBuilder {
     //判断是否已经封装过了请求方法
     if (!params) {
-      throw new Error("请设置有效请求参数");
+      throw new Error('请设置有效请求参数');
     }
 
-    this._method("delete", path, params, contentType);
+    this._method('delete', path, params, contentType);
 
     return this;
   }
@@ -156,7 +140,7 @@ export default class RequestBuilder {
    * @param segment
    * @return {RequestBuilder}
    */
-  pathSegment(segment: string = ""): RequestBuilder {
+  pathSegment(segment: string = ''): RequestBuilder {
     if (!!segment) {
       //当segment有意义值时
       this.path = `${this.path}/${this._encode(segment)}`;
@@ -169,10 +153,10 @@ export default class RequestBuilder {
   /**
    * @function 设置本次请求为CORS
    */
-  cors(origin: string = "*"): RequestBuilder {
-    this._option.mode = "cors";
+  cors(origin: string = '*'): RequestBuilder {
+    this._option.mode = 'cors';
 
-    this.header("Origin", origin);
+    this.header('Origin', origin);
 
     return this;
   }
@@ -182,14 +166,14 @@ export default class RequestBuilder {
    * @param {*} keyOrMap * 表示自动带上所有的 cookie
    * @param {*} value 当第一个参数为字符串时，使用第二个参数的键值
    */
-  cookie(keyOrMap: string | Object, value: string = "value"): RequestBuilder {
+  cookie(keyOrMap: string | Object, value: string = 'value'): RequestBuilder {
     if (!keyOrMap) {
       return this;
     }
 
-    if (typeof keyOrMap === "string") {
-      if (keyOrMap === "*") {
-        this._option.credentials = "include";
+    if (typeof keyOrMap === 'string') {
+      if (keyOrMap === '*') {
+        this._option.credentials = 'include';
       } else {
         this.cookieParams[keyOrMap] = value;
       }
@@ -204,9 +188,9 @@ export default class RequestBuilder {
    * @function 仅允许对于GET动作进行缓存
    * @return {RequestBuilder}
    */
-  cache(cacheControl: string = "no-cache", maxAge: number = 0): RequestBuilder {
-    if (this._option.method !== "get") {
-      throw new Error("仅允许对 GET 请求进行缓存");
+  cache(cacheControl: string = 'no-cache', maxAge: number = 0): RequestBuilder {
+    if (this._option.method !== 'get') {
+      throw new Error('仅允许对 GET 请求进行缓存');
     }
 
     this._option.cache = cacheControl;
@@ -223,13 +207,13 @@ export default class RequestBuilder {
 
     // 设置 Cookie
     if (!!this.cookieParams && Object.keys(this.cookieParams).length > 0) {
-      this.header("Cookie", this._paramsToQueryString(this.cookieParams));
+      this.header('Cookie', this._paramsToQueryString(this.cookieParams));
     }
 
     // 构建查询字符串
     let queryString = !!this._paramsToQueryString(queryParams)
       ? `?${this._paramsToQueryString(queryParams)}`
-      : "";
+      : '';
 
     const request = {
       url: packagedPath + queryString,
@@ -237,7 +221,7 @@ export default class RequestBuilder {
     };
 
     // 每次 build 之后会重置对象
-    this.path = "/";
+    this.path = '/';
 
     // 如果选择了重置则完全重置
     if (reset) {
@@ -260,20 +244,20 @@ export default class RequestBuilder {
    * @private
    */
   _method(
-    method: string = "get",
-    path: string = "/",
+    method: string = 'get',
+    path: string = '/',
     params: Object = {},
-    contentType: string = "json"
+    contentType: string = 'json'
   ) {
     // 设置请求方式
     this._option.method = method;
 
     // 设置不同的请求体格式
-    if (method !== "get") {
+    if (method !== 'get') {
       // Fix，对于 GET 请求不再强制设置格式
-      this.header("Content-Type", `application/${contentType}`);
+      this.header('Content-Type', `application/${contentType}`);
 
-      if (contentType === "x-www-form-urlencoded") {
+      if (contentType === 'x-www-form-urlencoded') {
         // 根据不同的编码格式设置不同的body内容
         // 将构造好的查询字符串添加到body中
         this._option.body = this._paramsToQueryString(params);
@@ -293,7 +277,7 @@ export default class RequestBuilder {
    * @private
    */
   _encode(str: string) {
-    if (this.encoding === "utf8") {
+    if (this.encoding === 'utf8') {
       return encodeURIComponent(str);
     } else {
       return urlencode(str, this.encoding);
@@ -305,7 +289,7 @@ export default class RequestBuilder {
    * @param {*} params
    */
   _paramsToQueryString(params: Object | void): string {
-    let queryString: string = "";
+    let queryString: string = '';
 
     // 构造查询字符串
     if (!!params && Object.keys(params).length > 0) {

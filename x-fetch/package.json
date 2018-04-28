@@ -5,16 +5,20 @@
   "main": "dist/index.js",
   "scripts": {
     "prepublish": "npm run build",
-    "build":
-      "rm -rf dist && node_modules/babel-cli/bin/babel.js src --out-dir dist",
+    "build": "rm -rf dist && node_modules/babel-cli/bin/babel.js src --out-dir dist",
     "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url":
-      "https://github.com/wxyyxc1992/Web-Development-And-Engineering-Practices"
+    "url": "https://github.com/wxyyxc1992/Web-Development-And-Engineering-Practices"
   },
-  "keywords": ["fetch", "fluent", "super-agent", "cache", "timeout"],
+  "keywords": [
+    "fetch",
+    "fluent",
+    "super-agent",
+    "cache",
+    "timeout"
+  ],
   "author": "wxyyxc1992",
   "license": "ISC",
   "dependencies": {
@@ -30,6 +34,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
-    "chai": "^3.5.0"
+    "chai": "^3.5.0",
+    "microbundle": "^0.4.4"
   }
 }
