@@ -10,7 +10,9 @@ Decorate once, use everywhere.
 
 基于 Proxy 的高性能动态监测
 
-# [ast-manipulator](./ast-manipulator): 一系列基于 Babel 或者其他方式进行语法转换的工具
+# [ast-manipulator](./ast-manipulator)
+
+一系列基于 Babel 或者其他方式进行语法转换的工具
 
 * [babel-plugin-jsx-nested-classname](./ast-manipulator/babel-plugin-jsx-nested-classname)
 
