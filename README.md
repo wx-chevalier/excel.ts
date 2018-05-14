@@ -8,7 +8,7 @@ Decorate once, use everywhere.
 
 # observer-x
 
-基于 Proxy 的高性能动态监测
+基于 Proxy 的高性能动态监测。
 
 # [ast-manipulator](./ast-manipulator)
 
@@ -20,12 +20,12 @@ babel-plugin-jsx-nested-classname 允许在 JSX 中以类似于 SCSS 的语法�
 
 # x-fetch
 
-Extreme and fluent wrapper for fetch
+Extreme and fluent wrapper for fetch.
 
 # wi-bridge
 
-Bridge for communication between windows or iframes
+Bridge for communication between windows or iframes.
 
 # declarative-validator
 
-声明式校验 
+声明式校验。
