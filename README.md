@@ -1,160 +1,196 @@
+# x-spreadsheet
 
-> [Koa2 Boilerplate](https://parg.co/bvx)
+[![npm package](https://img.shields.io/npm/v/x-data-spreadsheet.svg)](https://www.npmjs.org/package/x-data-spreadsheet)
+[![NPM downloads](http://img.shields.io/npm/dm/x-data-spreadsheet.svg)](https://npmjs.org/package/x-data-spreadsheet)
+[![NPM downloads](http://img.shields.io/npm/dt/x-data-spreadsheet.svg)](https://npmjs.org/package/x-data-spreadsheet)
+[![Build passing](https://travis-ci.org/myliang/x-spreadsheet.svg?branch=master)](https://travis-ci.org/myliang/x-spreadsheet)
+[![codecov](https://codecov.io/gh/myliang/x-spreadsheet/branch/master/graph/badge.svg)](https://codecov.io/gh/myliang/x-spreadsheet)
+![GitHub](https://img.shields.io/github/license/myliang/x-spreadsheet.svg)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/myliang/x-spreadsheet.svg)
+[![Join the chat at https://gitter.im/x-datav/spreadsheet](https://badges.gitter.im/x-datav/spreadsheet.svg)](https://gitter.im/x-datav/spreadsheet?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-# swagger-decorator: Node.js 应用中一处注解，多处使用
+> A web-based JavaScript spreadsheet
 
-> - [OpenAPI Specification](http://swagger.io/specification/)
+<p align="center">
+  <a href="https://github.com/myliang/x-spreadsheet">
+    <img width="100%" src="https://raw.githubusercontent.com/myliang/x-spreadsheet/master/docs/demo.png">
+  </a>
+</p>
 
-- use yarn or npm to install:
+## Document
+* en
+* [zh-cn 中文](https://hondrytravis.github.io/x-spreadsheet-doc/)
+
+## CDN
+```html
+<link rel="stylesheet" href="https://unpkg.com/x-data-spreadsheet@1.1.5/dist/xspreadsheet.css">
+<script src="https://unpkg.com/x-data-spreadsheet@1.1.5/dist/xspreadsheet.js"></script>
+
+<script>
+   x_spreadsheet('#xspreadsheet');
+</script>
+```
+
+## NPM
+
 ```shell
-$ yarn add swagger-decorator
-
-$ yarn add transform-decorators-legacy -D
+npm install x-data-spreadsheet
 ```
 
-- import `wrappingKoaRouter` and wrap the router created by koa-router:
-```javascript
-import { wrappingKoaRouter } from "swagger-decorator";
-
-...
-
-const Router = require("koa-router");
-
-const router = new Router();
-
-wrappingKoaRouter(router, "localhost:8080", "/api", {
-  title: "Node Server Boilerplate",
-  version: "0.0.1",
-  description: "Koa2, koa-router,Webpack"
-});
-
-// define default route
-router.get("/", async function(ctx, next) {
-  ctx.body = { msg: "Node Server Boilerplate" };
-});
-
-// use scan to auto add method in class
-router.scan(UserController);
+```html
+<div id="x-spreadsheet-demo"></div>
 ```
 
-- define Controller and use decorator to attach description for api:
 ```javascript
-import {
-  apiDescription,
-  apiRequestMapping,
-  apiResponse,
-  bodyParameter,
-  pathParameter,
-  queryParameter
-} from "swagger-decorator";
-import User from "../entity/User";
+import Spreadsheet from "x-data-spreadsheet";
+// If you need to override the default options, you can set the override
+// const options = {};
+// new Spreadsheet('#x-spreadsheet-demo', options);
+const s = new Spreadsheet("#x-spreadsheet-demo")
+  .loadData({}) // load data
+  .change(data => {
+    // save data to db
+  });
 
+// data validation
+s.validate()
+```
 
-export default class UserController {
-  @apiRequestMapping("get", "/users")
-  @apiDescription("get all users list")
-  @apiResponse(200, "get users successfully", [User])
-  static async getUsers(ctx, next): [User] {
-    ...
-  }
-
-  @apiRequestMapping("get", "/user/:id")
-  @apiDescription("get user object by id, only access self or friends")
-  @pathParameter({
-    name: "id",
-    description: "user id",
-    type: "integer"
-  })
-  @queryParameter({
-    name: "tags",
-    description: "user tags, for filtering users",
-    required: false,
-    type: "array",
-    items: ["string"]
-  })
-  @apiResponse(200, "get user successfully", User)
-  static async getUserByID(ctx, next): User {
-    ...
-  }
-
-  @apiRequestMapping("post", "/user")
-  @apiDescription("create new user")
-  @bodyParameter({
-    name: "user",
-    description: "the new user object, must include user name",
-    required: true,
-    schema: User
-  })
-  @apiResponse(200, "create new user successfully", {
-    status_code: "200"
-  })
-  static async postUser(): number {
-    ...
-  }
+```javascript
+// default options
+{
+  mode: 'edit', // edit | read
+  showToolbar: true,
+  showGrid: true,
+  showContextmenu: true,
+  view: {
+    height: () => document.documentElement.clientHeight,
+    width: () => document.documentElement.clientWidth,
+  },
+  row: {
+    len: 100,
+    height: 25,
+  },
+  col: {
+    len: 26,
+    width: 100,
+    indexWidth: 60,
+    minWidth: 60,
+  },
+  style: {
+    bgcolor: '#ffffff',
+    align: 'left',
+    valign: 'middle',
+    textwrap: false,
+    strike: false,
+    underline: false,
+    color: '#0a0a0a',
+    font: {
+      name: 'Helvetica',
+      size: 10,
+      bold: false,
+      italic: false,
+    },
+  },
 }
 ```
 
-- decorate the Entity:
+## import | export xlsx
+
+https://github.com/SheetJS/sheetjs/tree/master/demos/xspreadsheet#saving-data
+
+thanks https://github.com/SheetJS/sheetjs
+
+## Bind events
 ```javascript
-// @flow
-
-import { entityProperty } from "swagger-decorator";
-
-
-export default class User {
-  
-  @entityProperty({
-    type: "integer",
-    description: "user id, auto-generated",
-    required: false
-  })
-  id: string = 0;
-
-  @entityProperty({
-    type: "string",
-    description: "user name, 3~12 characters",
-    required: true
-  })
-  name: string = "name";
-
-  friends: [number] = [1];
-
-  properties: {
-    address: string
-  } = {
-    address: "address"
-  };
-}
+const s = new Spreadsheet("#x-spreadsheet-demo")
+// event of click on cell
+s.on('cell-selected', (cell, ri, ci) => {});
+s.on('cells-selected', (cell, { sri, sci, eri, eci }) => {});
+// edited on cell
+s.on('cell-edited', (text, ri, ci) => {});
 ```
 
-- run your application and open swagger docs (PS. swagger-decorator contains Swagger UI):
-```text
-/swagger
+## update cell-text
+```javascript
+const s = new Spreadsheet("#x-spreadsheet-demo")
+// cellText(ri, ci, text, sheetIndex = 0)
+s.cellText(5, 5, 'xxxx').cellText(6, 5, 'yyy').reRender();
 ```
-![](https://coding.net/u/hoteam/p/Cache/git/raw/master/2017/6/1/WX20170617-172651.png)
-```text
-/swagger/api.json
+
+## get cell and cell-style
+```javascript
+const s = new Spreadsheet("#x-spreadsheet-demo")
+// cell(ri, ci, sheetIndex = 0)
+s.cell(ri, ci);
+// cellStyle(ri, ci, sheetIndex = 0)
+s.cellStyle(ri, ci);
 ```
-![](https://coding.net/u/hoteam/p/Cache/git/raw/master/2017/6/1/WX20170617-172707.png)
 
-# DataType
+## Internationalization
+```javascript
+// npm 
+import Spreadsheet from 'x-data-spreadsheet';
+import zhCN from 'x-data-spreadsheet/dist/locale/zh-cn';
 
-| Common Name | [`type`](http://swagger.io/specification/#dataTypeType) | [`format`](http://swagger.io/specification/#dataTypeFormat) | Comments                                 |
-| ----------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| integer     | `integer`                                | `int32`                                  | signed 32 bits                           |
-| long        | `integer`                                | `int64`                                  | signed 64 bits                           |
-| float       | `number`                                 | `float`                                  |                                          |
-| double      | `number`                                 | `double`                                 |                                          |
-| string      | `string`                                 |                                          |                                          |
-| byte        | `string`                                 | `byte`                                   | base64 encoded characters                |
-| binary      | `string`                                 | `binary`                                 | any sequence of octets                   |
-| boolean     | `boolean`                                |                                          |                                          |
-| date        | `string`                                 | `date`                                   | As defined by `full-date` - [RFC3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html#anchor14) |
-| dateTime    | `string`                                 | `date-time`                              | As defined by `date-time` - [RFC3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html#anchor14) |
-| password    | `string`                                 | `password`                               | Used to hint UIs the input needs to be obscured. |
+Spreadsheet.locale('zh-cn', zhCN);
+new Spreadsheet(document.getElementById('xss-demo'));
+```
+```html
+<!-- Import via CDN -->
+<link rel="stylesheet" href="https://unpkg.com/x-data-spreadsheet@1.1.5/dist/xspreadsheet.css">
+<script src="https://unpkg.com/x-data-spreadsheet@1.1.5/dist/xspreadsheet.js"></script>
+<script src="https://unpkg.com/x-data-spreadsheet@1.1.5/dist/locale/zh-cn.js"></script>
 
+<script>
+  x_spreadsheet.locale('zh-cn');
+</script>
+```
 
+## Features
+  - Undo & Redo
+  - Paint format
+  - Clear format
+  - Format
+  - Font
+  - Font size
+  - Font bold
+  - Font italic
+  - Underline
+  - Strike
+  - Text color
+  - Fill color
+  - Borders
+  - Merge cells
+  - Align
+  - Text wrapping
+  - Freeze cell
+  - Functions
+  - Resize row-height, col-width
+  - Copy, Cut, Paste
+  - Autofill
+  - Insert row, column
+  - Delete row, column
+  - hide row, column
+  - multiple sheets
+  - print
+  - Data validations
 
-# RoadMap
+## Development
 
-- 复合类型推导
+```sheel
+git clone https://github.com/myliang/x-spreadsheet.git
+cd x-spreadsheet
+npm install
+npm run dev
+```
+
+Open your browser and visit http://127.0.0.1:8080.
+
+## Browser Support
+
+Modern browsers(chrome, firefox, Safari).
+
+## LICENSE
+
+MIT
