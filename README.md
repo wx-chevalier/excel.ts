@@ -1,196 +1,125 @@
-# x-spreadsheet
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 
-[![npm package](https://img.shields.io/npm/v/x-data-spreadsheet.svg)](https://www.npmjs.org/package/x-data-spreadsheet)
-[![NPM downloads](http://img.shields.io/npm/dm/x-data-spreadsheet.svg)](https://npmjs.org/package/x-data-spreadsheet)
-[![NPM downloads](http://img.shields.io/npm/dt/x-data-spreadsheet.svg)](https://npmjs.org/package/x-data-spreadsheet)
-[![Build passing](https://travis-ci.org/myliang/x-spreadsheet.svg?branch=master)](https://travis-ci.org/myliang/x-spreadsheet)
-[![codecov](https://codecov.io/gh/myliang/x-spreadsheet/branch/master/graph/badge.svg)](https://codecov.io/gh/myliang/x-spreadsheet)
-![GitHub](https://img.shields.io/github/license/myliang/x-spreadsheet.svg)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/myliang/x-spreadsheet.svg)
-[![Join the chat at https://gitter.im/x-datav/spreadsheet](https://badges.gitter.im/x-datav/spreadsheet.svg)](https://gitter.im/x-datav/spreadsheet?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-> A web-based JavaScript spreadsheet
-
+<!-- PROJECT LOGO -->
+<br />
 <p align="center">
-  <a href="https://github.com/myliang/x-spreadsheet">
-    <img width="100%" src="https://raw.githubusercontent.com/myliang/x-spreadsheet/master/docs/demo.png">
+  <a href="https://github.com/wx-chevalier/excel.ts">
+    <img src="header.svg" alt="Logo" style="width: 100vw;height: 400px" />
   </a>
+
+  <p align="center">
+    <a href="https://github.com/wx-chevalier/excel.ts">View Demo</a>
+    ·
+    <a href="https://github.com/wx-chevalier/excel.ts/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/wx-chevalier/excel.ts/issues">Request Feature</a>
+  </p>
 </p>
 
-## Document
-* en
-* [zh-cn 中文](https://hondrytravis.github.io/x-spreadsheet-doc/)
+<!-- ABOUT THE PROJECT -->
 
-## CDN
-```html
-<link rel="stylesheet" href="https://unpkg.com/x-data-spreadsheet@1.1.5/dist/xspreadsheet.css">
-<script src="https://unpkg.com/x-data-spreadsheet@1.1.5/dist/xspreadsheet.js"></script>
+# excel.ts
 
-<script>
-   x_spreadsheet('#xspreadsheet');
-</script>
+[![Product Name Screen Shot](https://s2.ax1x.com/2020/01/06/lr2YdJ.md.png)](https://example.com)
+
+Here's a blank template to get started:
+**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
+`wx-chevalier`, `repo`, `twitter_handle`, `email`
+
+## Nav | 导航
+
+# Getting Started
+
+To get a local copy up and running follow these simple steps.
+
+## Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+
+- npm
+
+```sh
+npm install npm@latest -g
 ```
 
-## NPM
+## Installation
 
-```shell
-npm install x-data-spreadsheet
+1. Clone the repo
+
+```sh
+git clone https://github.com/wx-chevalier/excel.ts.git
 ```
 
-```html
-<div id="x-spreadsheet-demo"></div>
-```
+2. Install NPM packages
 
-```javascript
-import Spreadsheet from "x-data-spreadsheet";
-// If you need to override the default options, you can set the override
-// const options = {};
-// new Spreadsheet('#x-spreadsheet-demo', options);
-const s = new Spreadsheet("#x-spreadsheet-demo")
-  .loadData({}) // load data
-  .change(data => {
-    // save data to db
-  });
-
-// data validation
-s.validate()
-```
-
-```javascript
-// default options
-{
-  mode: 'edit', // edit | read
-  showToolbar: true,
-  showGrid: true,
-  showContextmenu: true,
-  view: {
-    height: () => document.documentElement.clientHeight,
-    width: () => document.documentElement.clientWidth,
-  },
-  row: {
-    len: 100,
-    height: 25,
-  },
-  col: {
-    len: 26,
-    width: 100,
-    indexWidth: 60,
-    minWidth: 60,
-  },
-  style: {
-    bgcolor: '#ffffff',
-    align: 'left',
-    valign: 'middle',
-    textwrap: false,
-    strike: false,
-    underline: false,
-    color: '#0a0a0a',
-    font: {
-      name: 'Helvetica',
-      size: 10,
-      bold: false,
-      italic: false,
-    },
-  },
-}
-```
-
-## import | export xlsx
-
-https://github.com/SheetJS/sheetjs/tree/master/demos/xspreadsheet#saving-data
-
-thanks https://github.com/SheetJS/sheetjs
-
-## Bind events
-```javascript
-const s = new Spreadsheet("#x-spreadsheet-demo")
-// event of click on cell
-s.on('cell-selected', (cell, ri, ci) => {});
-s.on('cells-selected', (cell, { sri, sci, eri, eci }) => {});
-// edited on cell
-s.on('cell-edited', (text, ri, ci) => {});
-```
-
-## update cell-text
-```javascript
-const s = new Spreadsheet("#x-spreadsheet-demo")
-// cellText(ri, ci, text, sheetIndex = 0)
-s.cellText(5, 5, 'xxxx').cellText(6, 5, 'yyy').reRender();
-```
-
-## get cell and cell-style
-```javascript
-const s = new Spreadsheet("#x-spreadsheet-demo")
-// cell(ri, ci, sheetIndex = 0)
-s.cell(ri, ci);
-// cellStyle(ri, ci, sheetIndex = 0)
-s.cellStyle(ri, ci);
-```
-
-## Internationalization
-```javascript
-// npm 
-import Spreadsheet from 'x-data-spreadsheet';
-import zhCN from 'x-data-spreadsheet/dist/locale/zh-cn';
-
-Spreadsheet.locale('zh-cn', zhCN);
-new Spreadsheet(document.getElementById('xss-demo'));
-```
-```html
-<!-- Import via CDN -->
-<link rel="stylesheet" href="https://unpkg.com/x-data-spreadsheet@1.1.5/dist/xspreadsheet.css">
-<script src="https://unpkg.com/x-data-spreadsheet@1.1.5/dist/xspreadsheet.js"></script>
-<script src="https://unpkg.com/x-data-spreadsheet@1.1.5/dist/locale/zh-cn.js"></script>
-
-<script>
-  x_spreadsheet.locale('zh-cn');
-</script>
-```
-
-## Features
-  - Undo & Redo
-  - Paint format
-  - Clear format
-  - Format
-  - Font
-  - Font size
-  - Font bold
-  - Font italic
-  - Underline
-  - Strike
-  - Text color
-  - Fill color
-  - Borders
-  - Merge cells
-  - Align
-  - Text wrapping
-  - Freeze cell
-  - Functions
-  - Resize row-height, col-width
-  - Copy, Cut, Paste
-  - Autofill
-  - Insert row, column
-  - Delete row, column
-  - hide row, column
-  - multiple sheets
-  - print
-  - Data validations
-
-## Development
-
-```sheel
-git clone https://github.com/myliang/x-spreadsheet.git
-cd x-spreadsheet
+```sh
 npm install
-npm run dev
 ```
 
-Open your browser and visit http://127.0.0.1:8080.
+<!-- USAGE EXAMPLES -->
 
-## Browser Support
+## Usage
 
-Modern browsers(chrome, firefox, Safari).
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-## LICENSE
+_For more examples, please refer to the [Documentation](https://example.com)_
 
-MIT
+# About
+
+<!-- ROADMAP -->
+
+## Roadmap
+
+See the [open issues](https://github.com/wx-chevalier/excel.ts/issues) for a list of proposed features (and known issues).
+
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<!-- LICENSE -->
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+<!-- ACKNOWLEDGEMENTS -->
+
+## Acknowledgements
+
+- [Awesome-Lists](https://github.com/wx-chevalier/Awesome-Lists): 📚 Guide to Galaxy, curated, worthy and up-to-date links/reading list for ITCS-Coding/Algorithm/SoftwareArchitecture/AI. 💫 ITCS-编程/算法/软件架构/人工智能等领域的文章/书籍/资料/项目链接精选。
+
+- [Awesome-CS-Books](https://github.com/wx-chevalier/Awesome-CS-Books): :books: Awesome CS Books/Series(.pdf by git lfs) Warehouse for Geeks, ProgrammingLanguage, SoftwareEngineering, Web, AI, ServerSideApplication, Infrastructure, FE etc. :dizzy: 优秀计算机科学与技术领域相关的书籍归档。
+
+- [exceljs #Project#](https://github.com/exceljs/exceljs): Excel Workbook Manager。
+
+## Copyright & More | 延伸阅读
+
+笔者所有文章遵循[知识共享 署名 - 非商业性使用 - 禁止演绎 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh)，欢迎转载，尊重版权。您还可以前往 [NGTE Books](https://ng-tech.icu/books/) 主页浏览包含知识体系、编程语言、软件工程、模式与架构、Web 与大前端、服务端开发实践与工程架构、分布式基础架构、人工智能与深度学习、产品运营与创业等多类目的书籍列表：
+
+[![NGTE Books](https://s2.ax1x.com/2020/01/18/19uXtI.png)](https://ng-tech.icu/books/)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/wx-chevalier/excel.ts.svg?style=flat-square
+[contributors-url]: https://github.com/wx-chevalier/excel.ts/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/wx-chevalier/excel.ts.svg?style=flat-square
+[forks-url]: https://github.com/wx-chevalier/excel.ts/network/members
+[stars-shield]: https://img.shields.io/github/stars/wx-chevalier/excel.ts.svg?style=flat-square
+[stars-url]: https://github.com/wx-chevalier/excel.ts/stargazers
+[issues-shield]: https://img.shields.io/github/issues/wx-chevalier/excel.ts.svg?style=flat-square
+[issues-url]: https://github.com/wx-chevalier/excel.ts/issues
+[license-shield]: https://img.shields.io/github/license/wx-chevalier/excel.ts.svg?style=flat-square
+[license-url]: https://github.com/wx-chevalier/excel.ts/blob/master/LICENSE.txt
