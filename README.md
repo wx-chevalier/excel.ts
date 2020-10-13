@@ -12,11 +12,11 @@
   </a>
 
   <p align="center">
-    <a href="https://github.com/wx-chevalier/excel.ts">View Demo</a>
+    <a href="https://github.com/wx-chevalier/excel.ts">Demo</a>
     ·
-    <a href="https://github.com/wx-chevalier/excel.ts/issues">Report Bug</a>
+    <a href="https://github.com/wx-chevalier">更多项目</a>
     ·
-    <a href="https://github.com/wx-chevalier/excel.ts/issues">Request Feature</a>
+    <a href="https://ng-tech.icu/books">参考资料</a>
   </p>
 </p>
 
@@ -24,11 +24,7 @@
 
 # excel.ts
 
-[![Product Name Screen Shot](https://s2.ax1x.com/2020/01/06/lr2YdJ.md.png)](https://example.com)
-
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`wx-chevalier`, `repo`, `twitter_handle`, `email`
+excel.ts 是基于 TypeScript 编写的前端 Excel 综合解决方案，包含了 POJO Schema 定义、多框架支持的 Web 端渲染以及 Node 导出服务。
 
 ## Nav | 导航
 
