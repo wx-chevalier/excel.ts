@@ -30,7 +30,7 @@ export interface WorksheetProperties {
   /**
    * 默认的对齐方式
    */
-  defaultAlignment: Alignment;
+  defaultAlignment: Partial<Alignment>;
 
   /**
    * default: 55

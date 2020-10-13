@@ -93,12 +93,14 @@ const inquiryOrderStatements: any[] = [
   },
 ];
 
-export const testData: {
+export interface TestData {
   totalPrice: number;
   date: string;
   customerName: string;
   inquiryOrderStatement: S.InquiryOrderStatement[];
-} = {
+}
+
+export const testData: TestData = {
   date: '2020-09-01~2020-10-13',
   totalPrice: 1355.91,
   customerName: '客户AAA1',
