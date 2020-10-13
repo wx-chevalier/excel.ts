@@ -19,7 +19,7 @@
     "react"
   ],
   "scripts": {
-    "build": "npm run build:es && npm run build:cjs && npm run build:umd",
+    "build": "npm run clean && npm run build:es && npm run build:cjs",
     "build:cjs": "tsc --project ./tsconfig.cjs.json",
     "build:es": "tsc --project ./tsconfig.es.json",
     "build:umd": "cross-env NODE_ENV=production webpack -p --config ./scripts/webpack/webpack.config.umd.js",
