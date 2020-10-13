@@ -1,10 +1,10 @@
 {
-  "name": "@m-fe/ts-lib",
+  "name": "@m-fe/excel-schema",
   "version": "0.0.1",
-  "description": "@m-fe/ts-lib",
+  "description": "@m-fe/excel-schema",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FE-Kits/fe-boilerplates"
+    "url": "https://github.com/wx-chevalier/excel.ts"
   },
   "author": "wx-chevalier@github",
   "license": "MIT",
@@ -35,7 +35,9 @@
     "test:cov": "npm run cleanCov && npm test -- --coverage",
     "test:watch": "npm test -- --watch"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@m-fe/utils": "^0.3.13"
+  },
   "devDependencies": {
     "@m-fe/app-config": "^0.5.2",
     "cross-env": "^7.0.2",

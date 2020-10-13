@@ -36,8 +36,8 @@
     "upgrade": "./scripts/tools/upgrade_pkgs.sh"
   },
   "devDependencies": {
-    "@svgr/webpack": "^5.4.0",
-    "@m-fe/app-config": "^0.5.2"
+    "@m-fe/app-config": "^0.5.2",
+    "@svgr/webpack": "^5.4.0"
   },
   "browserslist": [
     "extends @m-fe/browserslist-config"
@@ -63,5 +63,8 @@
       "plugin/no-unsupported-browser-features": null,
       "plugin/no-low-performance-animation-properties": null
     }
+  },
+  "dependencies": {
+    "core-js": "^3.6.5"
   }
 }

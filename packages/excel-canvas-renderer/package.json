@@ -1,43 +1,38 @@
 {
-  "name": "x-data-spreadsheet",
+  "name": "@m-fe/excel-canvas-render",
   "version": "1.1.5",
   "description": "a javascript xpreadsheet",
-  "types": "src/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/myliang/x-spreadsheet.git"
+  },
+  "author": "myliang <liangyuliang0335@gmail.com>",
+  "license": "MIT",
   "main": "src/index.js",
+  "types": "src/index.d.ts",
   "files": [
     "assets",
     "dist",
     "src"
   ],
-  "author": "myliang <liangyuliang0335@gmail.com>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/myliang/x-spreadsheet.git"
-  },
-  "nyc": {
-    "all": true,
-    "include": [
-      "src/core/*.js"
-    ],
-    "exclude": [
-      "**/*.spec.js"
-    ]
-  },
-  "scripts": {
-    "dev": "webpack-dev-server --open --config build/webpack.dev.js",
-    "build": "webpack --config build/webpack.prod.js",
-    "build-locale": "webpack --config build/webpack.locale.js",
-    "lint": "./node_modules/eslint/bin/eslint.js src",
-    "test": "nyc ./node_modules/mocha/bin/mocha --require @babel/register test/*",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov -t 31ecdb12-8ecb-46f7-a486-65c2516307dd",
-    "postinstall": "opencollective-postinstall"
-  },
   "keywords": [
     "javascript",
     "spreadsheet",
     "canvas"
   ],
+  "scripts": {
+    "build": "webpack --config build/webpack.prod.js",
+    "build-locale": "webpack --config build/webpack.locale.js",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov -t 31ecdb12-8ecb-46f7-a486-65c2516307dd",
+    "dev": "webpack-dev-server --open --config build/webpack.dev.js",
+    "lint": "./node_modules/eslint/bin/eslint.js src",
+    "postinstall": "opencollective-postinstall",
+    "test": "nyc ./node_modules/mocha/bin/mocha --require @babel/register test/*"
+  },
+  "dependencies": {
+    "opencollective": "^1.0.3",
+    "opencollective-postinstall": "^2.0.2"
+  },
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
@@ -63,12 +58,17 @@
     "webpack-dev-server": "^3.10.2",
     "webpack-merge": "^4.1.4"
   },
-  "dependencies": {
-    "opencollective": "^1.0.3",
-    "opencollective-postinstall": "^2.0.2"
-  },
   "collective": {
     "type": "opencollective",
     "url": "https://opencollective.com/x-spreadsheet"
+  },
+  "nyc": {
+    "all": true,
+    "include": [
+      "src/core/*.js"
+    ],
+    "exclude": [
+      "**/*.spec.js"
+    ]
   }
 }

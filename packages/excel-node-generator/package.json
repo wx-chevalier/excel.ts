@@ -1,10 +1,10 @@
 {
-  "name": "@m-fe/ts-lib",
+  "name": "@m-fe/excel-node-generator",
   "version": "0.0.1",
   "description": "@m-fe/ts-lib",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FE-Kits/fe-boilerplates"
+    "url": "https://github.com/wx-chevalier/excel.ts"
   },
   "author": "wx-chevalier@github",
   "license": "MIT",
@@ -35,10 +35,20 @@
     "test:cov": "npm run cleanCov && npm test -- --coverage",
     "test:watch": "npm test -- --watch"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@m-fe/excel-schema": "*",
+    "@m-fe/utils": "^0.3.13",
+    "axios": "^0.20.0",
+    "exceljs": "^4.1.1",
+    "fs-extra": "^9.0.1",
+    "urijs": "^1.19.2"
+  },
   "devDependencies": {
     "@m-fe/app-config": "^0.5.2",
+    "@types/fs-extra": "^9.0.2",
+    "@types/urijs": "^1.19.12",
     "cross-env": "^7.0.2",
+    "ufc-schema": "^0.5.46",
     "webpack": "^4.43.0"
   },
   "browserslist": [

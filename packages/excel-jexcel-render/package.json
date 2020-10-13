@@ -1,10 +1,10 @@
 {
-  "name": "@m-fe/ts-lib",
+  "name": "@m-fe/excel-jexcel-render",
   "version": "0.0.1",
   "description": "@m-fe/ts-lib",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FE-Kits/fe-boilerplates"
+    "url": "https://github.com/wx-chevalier/excel.ts"
   },
   "author": "wx-chevalier@github",
   "license": "MIT",

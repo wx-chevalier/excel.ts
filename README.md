@@ -26,6 +26,8 @@
 
 excel.ts 是基于 TypeScript 编写的前端 Excel 综合解决方案，包含了 POJO Schema 定义、多框架支持的 Web 端渲染以及 Node 导出服务。
 
+![excel.ts](https://s1.ax1x.com/2020/10/13/0fhh4S.png)
+
 ## Nav | 导航
 
 # Getting Started
