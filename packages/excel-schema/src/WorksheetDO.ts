@@ -81,7 +81,7 @@ export class WorksheetDO extends BaseEntity<WorksheetDO> {
   /**
    * Worksheet Properties
    */
-  properties: WorksheetProperties;
+  properties: Partial<WorksheetProperties>;
 
   constructor(data: Partial<WorksheetDO> = {}) {
     super(data);

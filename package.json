@@ -37,7 +37,8 @@
   },
   "devDependencies": {
     "@m-fe/app-config": "^0.5.2",
-    "@svgr/webpack": "^5.4.0"
+    "@svgr/webpack": "^5.4.0",
+    "react-dom": "^16.13.1"
   },
   "browserslist": [
     "extends @m-fe/browserslist-config"

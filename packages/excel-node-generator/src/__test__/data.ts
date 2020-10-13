@@ -97,14 +97,14 @@ export interface TestData {
   totalPrice: number;
   date: string;
   customerName: string;
-  inquiryOrderStatement: S.InquiryOrderStatement[];
+  inquiryOrderStatements: S.InquiryOrderStatement[];
 }
 
 export const testData: TestData = {
   date: '2020-09-01~2020-10-13',
   totalPrice: 1355.91,
   customerName: '客户AAA1',
-  inquiryOrderStatement: inquiryOrderStatements.map(
+  inquiryOrderStatements: inquiryOrderStatements.map(
     s => new S.InquiryOrderStatement(s),
   ),
 };

@@ -4,7 +4,7 @@ module.exports = {
       '@m-fe',
       {
         import: true,
-        react: true,
+        react: false,
         typescript: true,
       },
     ],

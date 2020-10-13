@@ -20,9 +20,18 @@ export async function generateByExcelJs(
 
   workbook.creator = workbookDO.creator;
   workbook.lastModifiedBy = workbookDO.lastModifiedBy;
-  workbook.created = new Date(workbookDO.created);
-  workbook.modified = new Date(workbookDO.modified);
-  workbook.lastPrinted = new Date(workbookDO.lastPrinted);
+
+  if (Date.parse(workbookDO.created)) {
+    workbook.created = new Date(workbookDO.created);
+  }
+
+  if (Date.parse(workbookDO.modified)) {
+    workbook.modified = new Date(workbookDO.modified);
+  }
+
+  if (Date.parse(workbookDO.lastPrinted)) {
+    workbook.lastPrinted = new Date(workbookDO.lastPrinted);
+  }
 
   for (const sheetDO of workbookDO.sheets) {
     const sheet = workbook.addWorksheet(sheetDO.name, {
@@ -98,15 +107,15 @@ export async function fillSheet(
 
   // 遍历全部的 Cell
   for (const cellDO of sheetDO.cells) {
-    let mergableCellAddress = `${cellDO.address.address}:${cellDO.address.address}`;
+    let mergableCellAddress = `${cellDO.address}:${cellDO.address}`;
 
     // 首先判断是否需要合并
-    if (cellDO.mergedCells && cellDO.mergedCells.length === 2) {
-      mergableCellAddress = `${cellDO.mergedCells[0].address}:${cellDO.mergedCells[1].address}`;
+    if (cellDO.mergedCellAddress) {
+      mergableCellAddress = `${cellDO.address}:${cellDO.mergedCellAddress}`;
       sheet.mergeCells(mergableCellAddress);
     }
 
-    const $cell = sheet.getCell(cellDO.address.address);
+    const $cell = sheet.getCell(cellDO.address);
 
     // 添加数据校验
     if (cellDO.dataValidation) {

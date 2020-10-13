@@ -183,14 +183,14 @@ export interface Style {
   fill: Fill;
 }
 
-export class Address extends BaseEntity<Address> {
+export class ParsedAddress extends BaseEntity<ParsedAddress> {
   sheetName?: string;
   address: string;
   col: string;
   row: number;
   $col$row: string;
 
-  constructor(data: Partial<Address> = {}) {
+  constructor(data: Partial<ParsedAddress> = {}) {
     super(data);
 
     // 判断 address 与 col/row 是否都有

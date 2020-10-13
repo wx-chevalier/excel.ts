@@ -1,6 +1,6 @@
-import { BaseEntity, isValidArray } from '@m-fe/utils';
+import { BaseEntity } from '@m-fe/utils';
 
-import { Address, Style } from './style';
+import { Style } from './style';
 import {
   CellErrorValue,
   CellFormulaValue,
@@ -41,13 +41,15 @@ export type CellValue =
   | CellImageValue;
 
 export class WorksheetCellDO extends BaseEntity<WorksheetCellDO> {
-  address: Address;
-  mergedCells?: [Address, Address];
+  address: string;
+
+  // 该 Cell 合并到的目标
+  mergedCellAddress?: string;
 
   type: CellValueType;
   value: CellValue;
 
-  style: Style;
+  style: Partial<Style>;
   formula?: string;
   sharedFormula?: string;
   result?: string | number | any;
@@ -56,17 +58,6 @@ export class WorksheetCellDO extends BaseEntity<WorksheetCellDO> {
 
   constructor(data: Partial<WorksheetCellDO> = {}) {
     super(data);
-
-    if (data.address) {
-      this.address = new Address(data.address);
-    }
-
-    if (isValidArray(data.mergedCells) && data.mergedCells.length === 2) {
-      this.mergedCells = [
-        new Address(data.mergedCells[0]),
-        new Address(data.mergedCells[1]),
-      ];
-    }
 
     if (!this.type) {
       // 根据值类型来指定类型

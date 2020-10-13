@@ -13,8 +13,8 @@ export enum ErrorValue {
 
 export interface CellImageValue {
   src: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
 }
 
 export interface CellErrorValue {
