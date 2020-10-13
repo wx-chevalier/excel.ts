@@ -67,6 +67,17 @@ export function genWorkbook(data: TestData) {
   // 添加题头
   const headers: { address: string; value: string }[] = [
     { address: 'A2', value: '订单编号' },
+    { address: 'B2', value: '创建时间' },
+    { address: 'C2', value: '文件名称' },
+    { address: 'D2', value: '图片预览' },
+    { address: 'E2', value: '打印材料' },
+    { address: 'F2', value: '增值后处理' },
+    { address: 'G2', value: '单件价格（元）' },
+    { address: 'H2', value: '数量（件）' },
+    { address: 'I2', value: '其他费用（元）' },
+    { address: 'J2', value: '其他费用说明' },
+    { address: 'K2', value: '付款方式' },
+    { address: 'L2', value: '订单金额（元）' },
   ];
 
   headers.forEach(({ address, value }) => {
