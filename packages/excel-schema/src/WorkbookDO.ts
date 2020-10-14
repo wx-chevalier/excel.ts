@@ -32,7 +32,7 @@ export class WorkbookDO extends BaseEntity<WorkbookDO> {
   properties: WorkbookProperties;
 
   /** 内容属性 */
-  sheets: WorksheetDO[] = [];
+  sheets: Partial<WorksheetDO>[] = [];
 
   constructor(data: Partial<WorkbookDO> = {}) {
     super(data);

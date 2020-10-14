@@ -88,7 +88,7 @@ export async function generateByExcelJs(
 /** 填写具体的某个 Sheet */
 export async function fillSheet(
   sheet: Worksheet,
-  sheetDO: WorksheetDO,
+  sheetDO: Partial<WorksheetDO>,
   workbook: Workbook,
 ) {
   for (const rowDO of sheetDO.rows) {
@@ -107,73 +107,85 @@ export async function fillSheet(
 
   // 遍历全部的 Cell
   for (const cellDO of sheetDO.cells) {
-    let mergableCellAddress = `${cellDO.address}:${cellDO.address}`;
+    try {
+      let mergableCellAddress = `${cellDO.address}:${cellDO.address}`;
 
-    // 首先判断是否需要合并
-    if (cellDO.mergedCellAddress) {
-      mergableCellAddress = `${cellDO.address}:${cellDO.mergedCellAddress}`;
-      sheet.mergeCells(mergableCellAddress);
-    }
-
-    const $cell = sheet.getCell(cellDO.address);
-
-    // 添加数据校验
-    if (cellDO.dataValidation) {
-      $cell.dataValidation = cellDO.dataValidation;
-    }
-
-    // 然后依次填充内容
-    if (cellDO.style) {
-      const { alignment, font } = cellDO.style;
-
-      if (alignment) {
-        $cell.alignment = {
-          ...($cell.alignment || {}),
-          ...alignment,
-        };
+      // 首先判断是否需要合并
+      if (cellDO.mergedCellAddress) {
+        mergableCellAddress = `${cellDO.address}:${cellDO.mergedCellAddress}`;
+        sheet.mergeCells(mergableCellAddress);
       }
 
-      if (font) {
-        $cell.font = {
-          ...($cell.font || {}),
-          ...font,
-        };
-      }
-    }
+      const $cell = sheet.getCell(cellDO.address);
 
-    switch (cellDO.type) {
-      case CellValueType.Null:
-        break;
-      case CellValueType.Merge:
-        break;
-      case CellValueType.Number:
-        $cell.value = cellDO.value as number;
-        break;
-      case CellValueType.String:
-        $cell.value = cellDO.value as string;
-        break;
-      case CellValueType.Date:
-        $cell.value = new Date(cellDO.value as string);
-        break;
-      case CellValueType.Hyperlink:
-        $cell.value = cellDO.value as CellHyperlinkValue;
-        break;
-      case CellValueType.RichText:
-        $cell.value = cellDO.value as CellRichTextValue;
-        break;
-      case CellValueType.Boolean:
-        $cell.value = cellDO.value as boolean;
-        break;
-      case CellValueType.Image:
-        const imageValue = cellDO.value as CellImageValue;
-        // 抓取图片
-        const base64 = await getImageAsBase64(imageValue.src);
-        const imageId = workbook.addImage({ base64, extension: 'png' });
-        sheet.addImage(imageId, mergableCellAddress);
-        break;
-      default:
-        $cell.value = cellDO.value as any;
-        break;
+      // 添加数据校验
+      if (cellDO.dataValidation) {
+        $cell.dataValidation = cellDO.dataValidation;
+      }
+
+      // 然后依次填充内容
+      if (cellDO.style) {
+        const { alignment, font } = cellDO.style;
+
+        if (alignment) {
+          $cell.alignment = {
+            ...($cell.alignment || {}),
+            ...alignment,
+          };
+        }
+
+        if (font) {
+          $cell.font = {
+            ...($cell.font || {}),
+            ...font,
+          };
+        }
+      }
+
+      switch (cellDO.type) {
+        case CellValueType.Null:
+          break;
+        case CellValueType.Merge:
+          break;
+        case CellValueType.Number:
+          $cell.value = cellDO.value as number;
+          break;
+        case CellValueType.String:
+          $cell.value = cellDO.value as string;
+          break;
+        case CellValueType.Date:
+          $cell.value = new Date(cellDO.value as string);
+          break;
+        case CellValueType.Hyperlink:
+          $cell.value = cellDO.value as CellHyperlinkValue;
+          break;
+        case CellValueType.RichText:
+          $cell.value = cellDO.value as CellRichTextValue;
+          break;
+        case CellValueType.Boolean:
+          $cell.value = cellDO.value as boolean;
+          break;
+        case CellValueType.Image:
+          const imageValue = cellDO.value as CellImageValue;
+          try {
+            // 抓取图片
+            const base64 = await getImageAsBase64(imageValue.src);
+            const imageId = workbook.addImage({ base64, extension: 'png' });
+            sheet.addImage(imageId, mergableCellAddress);
+          } catch (_) {
+            console.error(
+              '>>>fillSheet>>>CellValueType.Image>>>',
+              imageValue.src,
+            );
+          }
+
+          break;
+        default:
+          $cell.value = cellDO.value as any;
+          break;
+      }
+    } catch (_) {
+      console.error('>>>fillSheet>>>cell', _);
     }
   }
 }
