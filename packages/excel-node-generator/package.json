@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/excel-node-generator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "@m-fe/ts-lib",
   "repository": {
     "type": "git",
@@ -35,8 +35,10 @@
     "test:cov": "npm run cleanCov && npm test -- --coverage",
     "test:watch": "npm test -- --watch"
   },
+  "peerDependencies": {
+    "@m-fe/excel-schema": "*"
+  },
   "dependencies": {
-    "@m-fe/excel-schema": "*",
     "@m-fe/utils": "^0.3.13",
     "axios": "^0.20.0",
     "dayjs": "^1.9.3",
