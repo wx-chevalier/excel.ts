@@ -36,6 +36,7 @@ export async function generateByExcelJs(
   for (const sheetDO of workbookDO.sheets) {
     const sheet = workbook.addWorksheet(sheetDO.name, {
       pageSetup: ({ ...(sheetDO.pageSetup || {}) } as unknown) as PageSetup,
+      views: sheetDO.view ? [sheetDO.view] : [],
     });
 
     // 设置默认样式

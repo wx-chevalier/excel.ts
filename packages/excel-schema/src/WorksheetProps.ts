@@ -229,3 +229,120 @@ export interface HeaderFooter {
    */
   firstFooter: string;
 }
+
+export interface WorksheetViewCommon {
+  /**
+   * Sets the worksheet view's orientation to right-to-left, `false` by default
+   */
+  rightToLeft: boolean;
+
+  /**
+   * The currently selected cell
+   */
+  activeCell: string;
+
+  /**
+   * Shows or hides the ruler in Page Layout, `true` by default
+   */
+  showRuler: boolean;
+
+  /**
+   * Shows or hides the row and column headers (e.g. A1, B1 at the top and 1,2,3 on the left,
+   * `true` by default
+   */
+  showRowColHeaders: boolean;
+
+  /**
+   * Shows or hides the gridlines (shown for cells where borders have not been defined),
+   * `true` by default
+   */
+  showGridLines: boolean;
+
+  /**
+   * 	Percentage zoom to use for the view, `100` by default
+   */
+  zoomScale: number;
+
+  /**
+   * 	Normal zoom for the view, `100` by default
+   */
+  zoomScaleNormal: number;
+}
+
+export interface WorksheetViewNormal {
+  /**
+   * Controls the view state
+   */
+  state: 'normal';
+
+  /**
+   * Presentation style
+   */
+  style: 'pageBreakPreview' | 'pageLayout';
+}
+
+export interface WorksheetViewFrozen {
+  /**
+   * Where a number of rows and columns to the top and left are frozen in place.
+   * Only the bottom left section will scroll
+   */
+  state: 'frozen';
+
+  /**
+   * Presentation style
+   */
+  style?: 'pageBreakPreview';
+
+  /**
+   * How many columns to freeze. To freeze rows only, set this to 0 or undefined
+   */
+  xSplit?: number;
+
+  /**
+   * How many rows to freeze. To freeze columns only, set this to 0 or undefined
+   */
+  ySplit?: number;
+
+  /**
+   * Which cell will be top-left in the bottom-right pane. Note: cannot be a frozen cell.
+   * Defaults to first unfrozen cell
+   */
+  topLeftCell?: string;
+}
+
+export interface WorksheetViewSplit {
+  /**
+   * Where the view is split into 4 sections, each semi-independently scrollable.
+   */
+  state: 'split';
+
+  /**
+   * Presentation style
+   */
+  style?: 'pageBreakPreview' | 'pageLayout';
+
+  /**
+   * How many points from the left to place the splitter.
+   * To split vertically, set this to 0 or undefined
+   */
+  xSplit?: number;
+
+  /**
+   * How many points from the top to place the splitter.
+   * To split horizontally, set this to 0 or undefined
+   */
+  ySplit?: number;
+
+  /**
+   * Which cell will be top-left in the bottom-right pane
+   */
+  topLeftCell?: string;
+
+  /**
+   * Which pane will be active
+   */
+  activePane?: 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
+}
+
+export type WorksheetView = WorksheetViewCommon &
+  (WorksheetViewNormal | WorksheetViewFrozen | WorksheetViewSplit);

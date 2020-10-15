@@ -2,7 +2,12 @@ import { BaseEntity, isValidArray } from '@m-fe/utils';
 
 import { Alignment, Borders, Fill, Font, Protection, Style } from './style';
 import { WorksheetCellDO } from './WorksheetCellDO';
-import { HeaderFooter, PageSetup, WorksheetProperties } from './WorksheetProps';
+import {
+  HeaderFooter,
+  PageSetup,
+  WorksheetProperties,
+  WorksheetView,
+} from './WorksheetProps';
 
 export type WorksheetState = 'visible' | 'hidden' | 'veryHidden';
 
@@ -67,6 +72,11 @@ export class WorksheetDO extends BaseEntity<WorksheetDO> {
    * Contains information related to how a worksheet is printed
    */
   pageSetup: Partial<PageSetup>;
+
+  /**
+   *
+   */
+  view: Partial<WorksheetView>;
 
   /**
    * Worksheet Header and Footer
