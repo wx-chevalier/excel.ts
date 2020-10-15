@@ -8,7 +8,14 @@ import {
   WorksheetDO,
 } from '@m-fe/excel-schema';
 import { isValidArray } from '@m-fe/utils';
-import Excel, { PageSetup, Workbook, Worksheet } from 'exceljs';
+import Excel, {
+  Cell,
+  Column,
+  PageSetup,
+  Style,
+  Workbook,
+  Worksheet,
+} from 'exceljs';
 import fs from 'fs-extra';
 import QRCode from 'qrcode';
 
@@ -64,6 +71,10 @@ export async function generateByExcelJs(
 
         if (c.width) {
           $col.width = c.width;
+        }
+
+        if (c.style) {
+          mergeStyle($col, c.style);
         }
       });
     }
@@ -128,21 +139,7 @@ export async function fillSheet(
 
       // 然后依次填充内容
       if (cellDO.style) {
-        const { alignment, font } = cellDO.style;
-
-        if (alignment) {
-          $cell.alignment = {
-            ...($cell.alignment || {}),
-            ...alignment,
-          };
-        }
-
-        if (font) {
-          $cell.font = {
-            ...($cell.font || {}),
-            ...font,
-          };
-        }
+        mergeStyle($cell, cellDO.style);
       }
 
       switch (cellDO.type) {
@@ -206,5 +203,45 @@ export async function fillSheet(
     } catch (_) {
       console.error('>>>fillSheet>>>cell', _);
     }
+  }
+}
+
+/** 合并样式对象 */
+export function mergeStyle(obj: Cell | Partial<Column>, style: Partial<Style>) {
+  const { alignment, font, border, fill, protection } = style;
+
+  if (alignment) {
+    obj.alignment = {
+      ...(obj.alignment || {}),
+      ...alignment,
+    };
+  }
+
+  if (font) {
+    obj.font = {
+      ...(obj.font || {}),
+      ...font,
+    };
+  }
+
+  if (border) {
+    obj.border = {
+      ...(obj.border || {}),
+      ...border,
+    };
+  }
+
+  if (fill) {
+    obj.fill = {
+      ...(obj.fill || {}),
+      ...fill,
+    };
+  }
+
+  if (protection) {
+    obj.protection = {
+      ...(obj.protection || {}),
+      ...protection,
+    };
   }
 }
