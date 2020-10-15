@@ -1,6 +1,7 @@
 import {
   CellHyperlinkValue,
   CellImageValue,
+  CellQrcodeValue,
   CellRichTextValue,
   CellValueType,
   WorkbookDO,
@@ -9,6 +10,7 @@ import {
 import { isValidArray } from '@m-fe/utils';
 import Excel, { PageSetup, Workbook, Worksheet } from 'exceljs';
 import fs from 'fs-extra';
+import QRCode from 'qrcode';
 
 import { getImageAsBase64 } from './utils';
 
@@ -166,8 +168,24 @@ export async function fillSheet(
         case CellValueType.Boolean:
           $cell.value = cellDO.value as boolean;
           break;
+        case CellValueType.Qrcode:
+          const qrcodeValue = cellDO.value as CellQrcodeValue;
+
+          try {
+            const base64 = await QRCode.toDataURL(qrcodeValue.qrcodeText);
+            const imageId = workbook.addImage({ base64, extension: 'png' });
+            sheet.addImage(imageId, mergableCellAddress);
+          } catch (_) {
+            console.error(
+              '>>>fillSheet>>>CellValueType.Qrcode>>>',
+              qrcodeValue.qrcodeText,
+            );
+          }
+
+          break;
         case CellValueType.Image:
           const imageValue = cellDO.value as CellImageValue;
+
           try {
             // 抓取图片
             const base64 = await getImageAsBase64(imageValue.src);

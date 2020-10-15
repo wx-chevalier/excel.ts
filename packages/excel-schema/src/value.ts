@@ -17,6 +17,12 @@ export interface CellImageValue {
   height?: number;
 }
 
+export interface CellQrcodeValue {
+  qrcodeText: string;
+  width?: number;
+  height?: number;
+}
+
 export interface CellErrorValue {
   error:
     | '#N/A'

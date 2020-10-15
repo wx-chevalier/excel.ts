@@ -6,6 +6,7 @@ import {
   CellFormulaValue,
   CellHyperlinkValue,
   CellImageValue,
+  CellQrcodeValue,
   CellRichTextValue,
   CellSharedFormulaValue,
   DataValidation,
@@ -25,6 +26,7 @@ export enum CellValueType {
   Boolean = 9,
   Error = 10,
   Image = 11,
+  Qrcode = 12,
 }
 
 export type CellValue =
@@ -38,7 +40,8 @@ export type CellValue =
   | CellHyperlinkValue
   | CellFormulaValue
   | CellSharedFormulaValue
-  | CellImageValue;
+  | CellImageValue
+  | CellQrcodeValue;
 
 export class WorksheetCellDO extends BaseEntity<WorksheetCellDO> {
   address: string;
@@ -78,6 +81,8 @@ export class WorksheetCellDO extends BaseEntity<WorksheetCellDO> {
           this.type = CellValueType.RichText;
         } else if ((data.value as CellImageValue).src) {
           this.type = CellValueType.Image;
+        } else if ((data.value as CellQrcodeValue).qrcodeText) {
+          this.type = CellValueType.Qrcode;
         }
       }
     }
