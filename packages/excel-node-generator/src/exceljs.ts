@@ -145,63 +145,65 @@ export async function fillSheet(
           mergeStyle($cell, cellDO.style);
         }
 
-        switch (cellDO.type) {
-          case CellValueType.Null:
-            break;
-          case CellValueType.Merge:
-            break;
-          case CellValueType.Number:
-            $cell.value = cellDO.value as number;
-            break;
-          case CellValueType.String:
-            $cell.value = cellDO.value as string;
-            break;
-          case CellValueType.Date:
-            $cell.value = new Date(cellDO.value as string);
-            break;
-          case CellValueType.Hyperlink:
-            $cell.value = cellDO.value as CellHyperlinkValue;
-            break;
-          case CellValueType.RichText:
-            $cell.value = cellDO.value as CellRichTextValue;
-            break;
-          case CellValueType.Boolean:
-            $cell.value = cellDO.value as boolean;
-            break;
-          case CellValueType.Qrcode:
-            const qrcodeValue = cellDO.value as CellQrcodeValue;
+        if (cellDO.value) {
+          switch (cellDO.type) {
+            case CellValueType.Null:
+              break;
+            case CellValueType.Merge:
+              break;
+            case CellValueType.Number:
+              $cell.value = cellDO.value as number;
+              break;
+            case CellValueType.String:
+              $cell.value = cellDO.value as string;
+              break;
+            case CellValueType.Date:
+              $cell.value = new Date(cellDO.value as string);
+              break;
+            case CellValueType.Hyperlink:
+              $cell.value = cellDO.value as CellHyperlinkValue;
+              break;
+            case CellValueType.RichText:
+              $cell.value = cellDO.value as CellRichTextValue;
+              break;
+            case CellValueType.Boolean:
+              $cell.value = cellDO.value as boolean;
+              break;
+            case CellValueType.Qrcode:
+              const qrcodeValue = cellDO.value as CellQrcodeValue;
 
-            try {
-              const base64 = await QRCode.toDataURL(qrcodeValue.qrcodeText);
-              const imageId = workbook.addImage({ base64, extension: 'png' });
-              sheet.addImage(imageId, mergableCellAddress);
-            } catch (_) {
-              console.error(
-                '>>>fillSheet>>>CellValueType.Qrcode>>>',
-                qrcodeValue.qrcodeText,
-              );
-            }
+              try {
+                const base64 = await QRCode.toDataURL(qrcodeValue.qrcodeText);
+                const imageId = workbook.addImage({ base64, extension: 'png' });
+                sheet.addImage(imageId, mergableCellAddress);
+              } catch (_) {
+                console.error(
+                  '>>>fillSheet>>>CellValueType.Qrcode>>>',
+                  qrcodeValue.qrcodeText,
+                );
+              }
 
-            break;
-          case CellValueType.Image:
-            const imageValue = cellDO.value as CellImageValue;
+              break;
+            case CellValueType.Image:
+              const imageValue = cellDO.value as CellImageValue;
 
-            try {
-              // 抓取图片
-              const base64 = await getImageAsBase64(imageValue.src);
-              const imageId = workbook.addImage({ base64, extension: 'png' });
-              sheet.addImage(imageId, mergableCellAddress);
-            } catch (_) {
-              console.error(
-                '>>>fillSheet>>>CellValueType.Image>>>',
-                imageValue.src,
-              );
-            }
+              try {
+                // 抓取图片
+                const base64 = await getImageAsBase64(imageValue.src);
+                const imageId = workbook.addImage({ base64, extension: 'png' });
+                sheet.addImage(imageId, mergableCellAddress);
+              } catch (_) {
+                console.error(
+                  '>>>fillSheet>>>CellValueType.Image>>>',
+                  imageValue.src,
+                );
+              }
 
-            break;
-          default:
-            $cell.value = cellDO.value as any;
-            break;
+              break;
+            default:
+              $cell.value = cellDO.value as any;
+              break;
+          }
         }
       } catch (_) {
         console.error('>>>fillSheet>>>cell', _);
