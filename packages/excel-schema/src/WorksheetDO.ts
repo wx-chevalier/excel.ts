@@ -1,7 +1,7 @@
 import { BaseEntity, isValidArray } from '@m-fe/utils';
 
 import { Alignment, Borders, Fill, Font, Protection, Style } from './style';
-import { mergeCell, WorksheetCellDO } from './WorksheetCellDO';
+import { WorksheetCellDO, mergeCell, mergeStyle } from './WorksheetCellDO';
 import {
   HeaderFooter,
   PageSetup,
@@ -20,6 +20,17 @@ export class WorksheetRowDO extends BaseEntity<WorksheetRowDO> {
   hidden: boolean;
   outlineLevel: number;
   collapsed: boolean;
+}
+
+function mergeRow(
+  row1: Partial<WorksheetRowDO>,
+  row2: Partial<WorksheetRowDO>,
+) {
+  return new WorksheetRowDO({
+    ...row1,
+    ...row2,
+    style: mergeStyle(row1.style, row2.style),
+  });
 }
 
 export class WorksheetColDO extends BaseEntity<WorksheetColDO> {
@@ -52,21 +63,25 @@ export class WorksheetColDO extends BaseEntity<WorksheetColDO> {
    * Styles applied to the column
    */
   style: Partial<Style>;
+}
 
-  border: Partial<Borders>;
-  fill: Fill;
-  numFmt: string;
-  font: Partial<Font>;
-  alignment: Partial<Alignment>;
-  protection: Partial<Protection>;
+function mergeCol(
+  col1: Partial<WorksheetColDO>,
+  col2: Partial<WorksheetColDO>,
+) {
+  return new WorksheetRowDO({
+    ...col1,
+    ...col2,
+    style: mergeStyle(col1.style, col2.style),
+  });
 }
 
 export class WorksheetDO extends BaseEntity<WorksheetDO> {
   name: string;
 
-  columns: Array<Partial<WorksheetColDO>>;
-  rows: Array<Partial<WorksheetRowDO>>;
-  cells: Partial<WorksheetCellDO>[];
+  columns: Array<Partial<WorksheetColDO>> = [];
+  rows: Array<Partial<WorksheetRowDO>> = [];
+  cells: Partial<WorksheetCellDO>[] = [];
 
   /**
    * Contains information related to how a worksheet is printed
@@ -110,6 +125,32 @@ export class WorksheetDO extends BaseEntity<WorksheetDO> {
     }
 
     this.cells = Object.values(finalCellMap);
+
+    const finalRowMap: Record<number, Partial<WorksheetRowDO>> = {};
+
+    // 合并 rows
+    for (const row of this.rows) {
+      if (!finalRowMap[row.number]) {
+        finalRowMap[row.number] = row;
+      } else {
+        finalRowMap[row.number] = mergeRow(finalRowMap[row.number], row);
+      }
+    }
+
+    this.rows = Object.values(finalRowMap);
+
+    // 合并 cols
+    const finalColMap: Record<number, Partial<WorksheetColDO>> = {};
+
+    for (const col of this.columns) {
+      if (!finalColMap[col.key]) {
+        finalColMap[col.key] = col;
+      } else {
+        finalColMap[col.key] = mergeCol(finalColMap[col.key], col);
+      }
+    }
+
+    this.columns = Object.values(finalColMap);
   }
 
   constructor(data: Partial<WorksheetDO> = {}) {

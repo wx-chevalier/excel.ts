@@ -35,6 +35,7 @@ export class WorkbookDO extends BaseEntity<WorkbookDO> {
   sheets: Partial<WorksheetDO>[] = [];
 
   optimize() {
+    // 优化 Sheet
     for (const s of this.sheets) {
       s.optimize();
     }
