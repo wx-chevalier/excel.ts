@@ -34,6 +34,12 @@ export class WorkbookDO extends BaseEntity<WorkbookDO> {
   /** 内容属性 */
   sheets: Partial<WorksheetDO>[] = [];
 
+  optimize() {
+    for (const s of this.sheets) {
+      s.optimize();
+    }
+  }
+
   constructor(data: Partial<WorkbookDO> = {}) {
     super(data);
 

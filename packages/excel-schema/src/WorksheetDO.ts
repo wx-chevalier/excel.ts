@@ -1,7 +1,7 @@
 import { BaseEntity, isValidArray } from '@m-fe/utils';
 
 import { Alignment, Borders, Fill, Font, Protection, Style } from './style';
-import { WorksheetCellDO } from './WorksheetCellDO';
+import { mergeCell, WorksheetCellDO } from './WorksheetCellDO';
 import {
   HeaderFooter,
   PageSetup,
@@ -92,6 +92,25 @@ export class WorksheetDO extends BaseEntity<WorksheetDO> {
    * Worksheet Properties
    */
   properties: Partial<WorksheetProperties>;
+
+  optimize() {
+    // 合并 cells
+    const finalCellMap: Record<string, Partial<WorksheetCellDO>> = {};
+
+    for (const cell of this.cells) {
+      if (!finalCellMap[cell.address]) {
+        finalCellMap[cell.address] = cell;
+      } else {
+        // 如果已经存在，则进行合并
+        finalCellMap[cell.address] = mergeCell(
+          finalCellMap[cell.address],
+          cell,
+        );
+      }
+    }
+
+    this.cells = Object.values(finalCellMap);
+  }
 
   constructor(data: Partial<WorksheetDO> = {}) {
     super(data);

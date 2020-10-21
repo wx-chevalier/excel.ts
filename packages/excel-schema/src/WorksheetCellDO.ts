@@ -88,3 +88,71 @@ export class WorksheetCellDO extends BaseEntity<WorksheetCellDO> {
     }
   }
 }
+
+const hasValue = (v: any) => typeof v !== 'undefined' && v !== null && v !== '';
+
+/** 合并元组 */
+export function mergeCell(
+  cell1: Partial<WorksheetCellDO>,
+  cell2: Partial<WorksheetCellDO>,
+) {
+  // 合并值与类型
+  if (hasValue(cell2.value)) {
+    cell1.value = cell2.value;
+    cell1.type = cell2.type;
+  }
+
+  // 合并合并项目
+  if (cell2.mergedCellAddress) {
+    cell1.mergedCellAddress = cell2.mergedCellAddress;
+  }
+
+  // 合并样式
+  if (hasValue(cell2.style)) {
+    cell1.style = mergeStyle(cell1.style, cell2.style);
+  }
+
+  return cell1;
+}
+
+/** 合并样式对象 */
+export function mergeStyle(style1: Partial<Style>, style2: Partial<Style>) {
+  const { alignment, font, border, fill, protection } = style2;
+
+  if (alignment) {
+    style1.alignment = {
+      ...(style1.alignment || {}),
+      ...alignment,
+    };
+  }
+
+  if (font) {
+    style1.font = {
+      ...(style1.font || {}),
+      ...font,
+    };
+  }
+
+  if (border) {
+    style1.border = {
+      ...(style1.border || {}),
+      ...border,
+    };
+  }
+
+  if (fill) {
+    style1.fill = {
+      ...(style1.fill || {}),
+      ...fill,
+    };
+  }
+
+  if (protection) {
+    style1.protection = {
+      ...(style1.protection || {}),
+      ...protection,
+    };
+  }
+
+  return style1;
+}

@@ -28,8 +28,6 @@ excel.ts 是基于 TypeScript 编写的前端 Excel 综合解决方案，包含�
 
 ![excel.ts](https://s1.ax1x.com/2020/10/13/0fhh4S.png)
 
-## Nav | 导航
-
 # Getting Started
 
 To get a local copy up and running follow these simple steps.
@@ -62,9 +60,7 @@ npm install
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+### ufc-schema
 
 # About
 
@@ -73,6 +69,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## Roadmap
 
 See the [open issues](https://github.com/wx-chevalier/excel.ts/issues) for a list of proposed features (and known issues).
+
+- [ ] 在 schema 中添加 prune 方法，能够合并 cells；
 
 <!-- CONTRIBUTING -->
 
