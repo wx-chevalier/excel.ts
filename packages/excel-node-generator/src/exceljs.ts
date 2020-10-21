@@ -130,7 +130,9 @@ export async function fillSheet(
         // 首先判断是否需要合并
         if (cellDO.mergedCellAddress) {
           mergableCellAddress = `${cellDO.address}:${cellDO.mergedCellAddress}`;
-          sheet.mergeCells(mergableCellAddress);
+          try {
+            sheet.mergeCells(mergableCellAddress);
+          } catch (_) {}
         }
 
         const $cell = sheet.getCell(cellDO.address);
