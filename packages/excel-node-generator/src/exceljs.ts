@@ -12,6 +12,7 @@ import Excel, {
   Cell,
   Column,
   PageSetup,
+  Row,
   Style,
   Workbook,
   Worksheet,
@@ -85,6 +86,10 @@ export async function generateByExcelJs(
 
         if (c.height) {
           $row.height = c.height;
+        }
+
+        if (c.style) {
+          mergeStyle($row, c.style);
         }
       });
     }
@@ -215,7 +220,10 @@ export async function fillSheet(
 }
 
 /** 合并样式对象 */
-export function mergeStyle(obj: Cell | Partial<Column>, style: Partial<Style>) {
+export function mergeStyle(
+  obj: Cell | Partial<Column> | Partial<Row>,
+  style: Partial<Style>,
+) {
   const { alignment, font, border, fill, protection } = style;
 
   if (alignment) {

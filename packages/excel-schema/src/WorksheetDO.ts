@@ -1,6 +1,6 @@
 import { BaseEntity, isValidArray } from '@m-fe/utils';
 
-import { Alignment, Borders, Fill, Font, Protection, Style } from './style';
+import { Style } from './style';
 import { WorksheetCellDO, mergeCell, mergeStyle } from './WorksheetCellDO';
 import {
   HeaderFooter,
