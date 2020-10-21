@@ -117,6 +117,10 @@ export function mergeCell(
 
 /** 合并样式对象 */
 export function mergeStyle(style1: Partial<Style>, style2: Partial<Style>) {
+  if (!style1 || !style2) {
+    return style1 || style2 || {};
+  }
+
   const { alignment, font, border, fill, protection } = style2;
 
   if (alignment) {
