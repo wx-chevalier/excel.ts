@@ -69,7 +69,10 @@ export class WorksheetCellDO extends BaseEntity<WorksheetCellDO> {
       } else if (typeof data.value === 'number') {
         this.type = CellValueType.Number;
       } else if (typeof data.value === 'string') {
-        if (Date.parse(data.value)) {
+        if (
+          (data.value.includes('-') || data.value.includes('/')) &&
+          Date.parse(data.value)
+        ) {
           this.type = CellValueType.Date;
         } else {
           this.type = CellValueType.String;

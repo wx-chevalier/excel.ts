@@ -15,9 +15,11 @@ export interface CellImageValue {
   src: string;
   width?: number;
   height?: number;
+  tl?: { col: number; row: number };
+  br?: { col: number; row: number };
 }
 
-export interface CellQrcodeValue {
+export interface CellQrcodeValue extends Omit<CellImageValue, 'src'> {
   qrcodeText: string;
   width?: number;
   height?: number;

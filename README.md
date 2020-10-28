@@ -3,6 +3,8 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
+![excel-schema](https://img.shields.io/npm/v/@m-fe/excel-schema.svg)
+![excel-node-generator](https://img.shields.io/npm/v/@m-fe/excel-node-generator.svg)
 
 <!-- PROJECT LOGO -->
 <br />

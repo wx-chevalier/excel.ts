@@ -182,7 +182,16 @@ export async function fillSheet(
               try {
                 const base64 = await QRCode.toDataURL(qrcodeValue.qrcodeText);
                 const imageId = workbook.addImage({ base64, extension: 'png' });
-                sheet.addImage(imageId, mergableCellAddress);
+
+                // 判断是否指定了图片坐标，如果已经指定，则直接放置
+                if (qrcodeValue.tl && qrcodeValue.br) {
+                  sheet.addImage(imageId, {
+                    tl: qrcodeValue.tl as any,
+                    br: qrcodeValue.br as any,
+                  });
+                } else {
+                  sheet.addImage(imageId, mergableCellAddress);
+                }
               } catch (_) {
                 console.error(
                   '>>>fillSheet>>>CellValueType.Qrcode>>>',
@@ -198,7 +207,15 @@ export async function fillSheet(
                 // 抓取图片
                 const base64 = await getImageAsBase64(imageValue.src);
                 const imageId = workbook.addImage({ base64, extension: 'png' });
-                sheet.addImage(imageId, mergableCellAddress);
+
+                if (imageValue.tl && imageValue.br) {
+                  sheet.addImage(imageId, {
+                    tl: imageValue.tl as any,
+                    br: imageValue.br as any,
+                  });
+                } else {
+                  sheet.addImage(imageId, mergableCellAddress);
+                }
               } catch (_) {
                 console.error(
                   '>>>fillSheet>>>CellValueType.Image>>>',
