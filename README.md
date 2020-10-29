@@ -72,7 +72,9 @@ npm install
 
 See the [open issues](https://github.com/wx-chevalier/excel.ts/issues) for a list of proposed features (and known issues).
 
-- [ ] 在 schema 中添加 prune 方法，能够合并 cells；
+- [x] 在 schema 中添加 prune 方法，能够合并 cells；
+- [ ] 添加兼容 Table DataSource 的接口，自动生成 Schema；
+- [ ] 兼容支持使用 jexcel 进行模型渲染；
 
 <!-- CONTRIBUTING -->
 
