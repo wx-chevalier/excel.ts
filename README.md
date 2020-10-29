@@ -3,8 +3,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-![excel-schema](https://img.shields.io/npm/v/@m-fe/excel-schema.svg?label=excel-schema)
-![excel-node-generator](https://img.shields.io/npm/v/@m-fe/excel-node-generator.svg?label=excel-node-generator)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -62,7 +60,13 @@ npm install
 
 ## Usage
 
-### ufc-schema
+### excel-schema
+
+![excel-schema](https://img.shields.io/npm/v/@m-fe/excel-schema.svg?label=excel-schema)
+
+### excel-node-generator
+
+![excel-node-generator](https://img.shields.io/npm/v/@m-fe/excel-node-generator.svg?label=excel-node-generator)
 
 # About
 
