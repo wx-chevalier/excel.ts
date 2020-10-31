@@ -3,8 +3,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-![excel-schema](https://img.shields.io/npm/v/@m-fe/excel-schema.svg)
-![excel-node-generator](https://img.shields.io/npm/v/@m-fe/excel-node-generator.svg)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -62,7 +60,13 @@ npm install
 
 ## Usage
 
-### ufc-schema
+### excel-schema
+
+![excel-schema](https://img.shields.io/npm/v/@m-fe/excel-schema.svg?label=excel-schema)
+
+### excel-node-generator
+
+![excel-node-generator](https://img.shields.io/npm/v/@m-fe/excel-node-generator.svg?label=excel-node-generator)
 
 # About
 
@@ -72,7 +76,9 @@ npm install
 
 See the [open issues](https://github.com/wx-chevalier/excel.ts/issues) for a list of proposed features (and known issues).
 
-- [ ] 在 schema 中添加 prune 方法，能够合并 cells；
+- [x] 在 schema 中添加 prune 方法，能够合并 cells；
+- [ ] 添加兼容 Table DataSource 的接口，自动生成 Schema；
+- [ ] 兼容支持使用 jexcel 进行模型渲染；
 
 <!-- CONTRIBUTING -->
 
