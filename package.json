@@ -4,7 +4,7 @@
   "description": "Micro-Frontend Libs, with React & TS & Webpack",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FE-Kits/m-fe-libs"
+    "url": "https://github.com/wx-chevalier/m-fe-libs"
   },
   "author": "wx-chevalier@github",
   "license": "MIT",
@@ -35,6 +35,9 @@
     "test:watch": "yarn workspaces run test:watch",
     "upgrade": "./scripts/tools/upgrade_pkgs.sh"
   },
+  "dependencies": {
+    "core-js": "^3.6.5"
+  },
   "devDependencies": {
     "@m-fe/app-config": "^0.5.2",
     "@svgr/webpack": "^5.4.0",
@@ -64,8 +67,5 @@
       "plugin/no-unsupported-browser-features": null,
       "plugin/no-low-performance-animation-properties": null
     }
-  },
-  "dependencies": {
-    "core-js": "^3.6.5"
   }
 }
