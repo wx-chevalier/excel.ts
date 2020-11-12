@@ -7,7 +7,7 @@ import {
   WorkbookDO,
   WorksheetDO,
 } from '@m-fe/excel-schema';
-import { isValidArray } from '@m-fe/utils';
+import { isValidArray, setOssResize } from '@m-fe/utils';
 import Excel, {
   Cell,
   Column,
@@ -205,16 +205,24 @@ export async function fillSheet(
 
               try {
                 // 抓取图片
-                const base64 = await getImageAsBase64(imageValue.src);
-                const imageId = workbook.addImage({ base64, extension: 'png' });
+                const base64 = await getImageAsBase64(
+                  setOssResize(imageValue.src),
+                );
 
-                if (imageValue.tl && imageValue.br) {
-                  sheet.addImage(imageId, {
-                    tl: imageValue.tl as any,
-                    br: imageValue.br as any,
+                if (base64) {
+                  const imageId = workbook.addImage({
+                    base64,
+                    extension: 'png',
                   });
-                } else {
-                  sheet.addImage(imageId, mergableCellAddress);
+
+                  if (imageValue.tl && imageValue.br) {
+                    sheet.addImage(imageId, {
+                      tl: imageValue.tl as any,
+                      br: imageValue.br as any,
+                    });
+                  } else {
+                    sheet.addImage(imageId, mergableCellAddress);
+                  }
                 }
               } catch (_) {
                 console.error(
