@@ -62,6 +62,8 @@ export class WorksheetCellDO extends BaseEntity<WorksheetCellDO> {
   constructor(data: Partial<WorksheetCellDO> = {}) {
     super(data);
 
+    Object.assign(this, data);
+
     if (!this.type) {
       // 根据值类型来指定类型
       if (data.value === null) {

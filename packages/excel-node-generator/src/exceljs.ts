@@ -7,7 +7,7 @@ import {
   WorkbookDO,
   WorksheetDO,
 } from '@m-fe/excel-schema';
-import { isValidArray, setOssResize } from '@m-fe/utils';
+import { isValidArray } from '@m-fe/utils';
 import Excel, {
   Cell,
   Column,
@@ -205,9 +205,7 @@ export async function fillSheet(
 
               try {
                 // 抓取图片
-                const base64 = await getImageAsBase64(
-                  setOssResize(imageValue.src),
-                );
+                const base64 = await getImageAsBase64(imageValue.src);
 
                 if (base64) {
                   const imageId = workbook.addImage({

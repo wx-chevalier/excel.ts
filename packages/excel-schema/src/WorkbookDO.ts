@@ -44,6 +44,8 @@ export class WorkbookDO extends BaseEntity<WorkbookDO> {
   constructor(data: Partial<WorkbookDO> = {}) {
     super(data);
 
+    Object.assign(this, data);
+
     if (isValidArray(data.sheets)) {
       this.sheets = data.sheets.map(s => new WorksheetDO(s));
     }

@@ -20,6 +20,11 @@ export class WorksheetRowDO extends BaseEntity<WorksheetRowDO> {
   hidden: boolean;
   outlineLevel: number;
   collapsed: boolean;
+
+  constructor(props: Partial<WorksheetRowDO>) {
+    super(props);
+    Object.assign(this, props);
+  }
 }
 
 function mergeRow(
@@ -63,6 +68,11 @@ export class WorksheetColDO extends BaseEntity<WorksheetColDO> {
    * Styles applied to the column
    */
   style: Partial<Style>;
+
+  constructor(props: Partial<WorksheetColDO>) {
+    super(props);
+    Object.assign(this, props);
+  }
 }
 
 function mergeCol(
@@ -155,6 +165,8 @@ export class WorksheetDO extends BaseEntity<WorksheetDO> {
 
   constructor(data: Partial<WorksheetDO> = {}) {
     super(data);
+
+    Object.assign(this, data);
 
     if (isValidArray(data.columns)) {
       this.columns = data.columns.map(c => new WorksheetColDO(c));

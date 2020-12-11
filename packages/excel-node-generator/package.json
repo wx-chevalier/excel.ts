@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/excel-node-generator",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "@m-fe/excel-node-generator",
   "repository": {
     "type": "git",
@@ -39,7 +39,7 @@
     "@m-fe/excel-schema": "*"
   },
   "dependencies": {
-    "@m-fe/utils": "^0.3.13",
+    "@m-fe/utils": "^0.4.8",
     "axios": "^0.20.0",
     "dayjs": "^1.9.3",
     "exceljs": "^4.1.1",

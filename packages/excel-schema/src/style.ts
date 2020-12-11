@@ -193,6 +193,8 @@ export class ParsedAddress extends BaseEntity<ParsedAddress> {
   constructor(data: Partial<ParsedAddress> = {}) {
     super(data);
 
+    Object.assign(this, data);
+
     // 判断 address 与 col/row 是否都有
     if (this.address) {
       const parsedAddress = /([A-Z]+)(\d+)/.exec(this.address);

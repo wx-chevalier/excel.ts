@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/excel-schema",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "@m-fe/excel-schema",
   "repository": {
     "type": "git",
@@ -36,7 +36,7 @@
     "test:watch": "npm test -- --watch"
   },
   "dependencies": {
-    "@m-fe/utils": "^0.3.13"
+    "@m-fe/utils": "^0.4.8"
   },
   "devDependencies": {
     "@m-fe/app-config": "^0.5.2",
