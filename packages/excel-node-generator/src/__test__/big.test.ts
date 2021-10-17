@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 import _ from 'lodash';
 import path from 'path';
 
-import { generateByExcelJs } from '../exceljs';
+import { ExcelGenerator } from '../exceljs';
 
 import * as BigWorkbook from './big.json';
 
@@ -19,6 +19,11 @@ describe('Test adapter', () => {
   it('Big', async () => {
     const data = new WorkbookDO(BigWorkbook as any);
 
-    await generateByExcelJs(data, path.resolve(__dirname, 'test.xlsx'));
+    const generator = new ExcelGenerator(
+      data,
+      path.resolve(__dirname, 'test.xlsx'),
+    );
+
+    await generator.generateByExcelJs();
   });
 });
