@@ -129,18 +129,32 @@ export async function fillSheet(
   if (isValidArray(sheetDO.cells)) {
     // 遍历全部的 Cell
     for (const cellDO of sheetDO.cells) {
+      const $cell = sheet.getCell(cellDO.address);
+
       try {
         let mergableCellAddress = `${cellDO.address}:${cellDO.address}`;
 
         // 首先判断是否需要合并
-        if (cellDO.mergedCellAddress) {
+        if (
+          cellDO.mergedCellAddress &&
+          cellDO.mergedCellAddress !== cellDO.address &&
+          !$cell.isMerged
+        ) {
           mergableCellAddress = `${cellDO.address}:${cellDO.mergedCellAddress}`;
+
           try {
             sheet.mergeCells(mergableCellAddress);
-          } catch (_) {}
+          } catch (_) {
+            console.error(
+              '>>>exceljs>>>fillSheet>>>mergeCells>>>' +
+                cellDO.address +
+                ':' +
+                cellDO.mergedCellAddress +
+                '>>>error:' +
+                _,
+            );
+          }
         }
-
-        const $cell = sheet.getCell(cellDO.address);
 
         // 添加数据校验
         if (cellDO.dataValidation) {
