@@ -263,11 +263,23 @@ export class ExcelGenerator {
                       extension: 'png',
                     });
 
-                    if (imageValue.tl && imageValue.br) {
-                      sheet.addImage(imageId, {
-                        tl: imageValue.tl as any,
-                        br: imageValue.br as any,
-                      });
+                    if (imageValue.tl) {
+                      if (imageValue.br) {
+                        sheet.addImage(imageId, {
+                          tl: imageValue.tl as any,
+                          br: imageValue.br as any,
+                        });
+                      }
+
+                      if (imageValue.width && imageValue.height) {
+                        sheet.addImage(imageId, {
+                          tl: imageValue.tl as any,
+                          ext: {
+                            width: imageValue.width,
+                            height: imageValue.height,
+                          } as any,
+                        });
+                      }
                     } else {
                       sheet.addImage(imageId, mergableCellAddress);
                     }
