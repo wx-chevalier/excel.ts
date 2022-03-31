@@ -28,7 +28,8 @@ describe('Test adapter', () => {
           src:
             'https://ufc-prod-image.oss-cn-shanghai.aliyuncs.com/sync/e6/df3c8857c34a3035e22dfe3c182004/decompressed-1-UTR6800-JP-数量5-12-1软胶打印.stl.thumbnail.PNG?x-oss-process=image%2Fresize%2Cw_100',
           tl: { col: 1.5, row: 1.5 },
-          br: { col: 3.5, row: 5.5 },
+          width: 100,
+          height: 500,
         },
       }),
       new WorksheetCellDO({
